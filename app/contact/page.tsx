@@ -18,14 +18,14 @@ export default function ContactPage() {
     <div className="bg-black text-white min-h-screen pt-32 pb-20">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center">
-          <h1 className="font-heading text-5xl md:text-6xl font-bold text-[#D4AF37]">Contact Us</h1>
-          <p className="text-lg text-white/70 mt-4 max-w-3xl mx-auto">Get in touch with us for a free consultation.</p>
+          <h1 className="font-heading text-4xl md:text-6xl font-bold text-[#D4AF37]">Contact Us</h1>
+          <p className="text-base md:text-lg text-white/70 mt-4 max-w-3xl mx-auto">Get in touch with us for a free consultation.</p>
         </div>
 
         <div className="mt-16 grid md:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <div className="bg-[#1C1C1C] p-8 rounded-lg border border-white/10">
-            <h2 className="font-heading text-3xl font-bold mb-6">Send us a Message</h2>
+          <div className="bg-[#1C1C1C] p-6 md:p-8 rounded-lg border border-white/10">
+            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-6">Send us a Message</h2>
             <form action="#" method="POST" className="space-y-6">
               <div>
                 <label htmlFor="name" className="sr-only">Name</label>
@@ -34,6 +34,10 @@ export default function ContactPage() {
               <div>
                 <label htmlFor="email" className="sr-only">Email</label>
                 <input type="email" name="email" id="email" placeholder="Your Email" className="w-full bg-black/50 border border-white/20 rounded-md p-3 focus:ring-[#D4AF37] focus:border-[#D4AF37]" />
+              </div>
+              <div>
+                <label htmlFor="phone" className="sr-only">Phone Number</label>
+                <input type="tel" name="phone" id="phone" placeholder="Your Phone Number" className="w-full bg-black/50 border border-white/20 rounded-md p-3 focus:ring-[#D4AF37] focus:border-[#D4AF37]" />
               </div>
               <div>
                 <label htmlFor="message" className="sr-only">Message</label>
@@ -46,14 +50,14 @@ export default function ContactPage() {
           {/* Contact Details */}
           <div className="space-y-8">
             <div>
-              <h3 className="font-heading text-2xl font-bold text-[#D4AF37] mb-3">Head Office</h3>
-              <p className="text-white/80">A 264, SURJAMLA VIHAR , DELHI 110092</p>
-              <p className="text-white/80 mt-1">Email: LUBECKELEVATOR@GMAIL.COM</p>
-              <p className="text-white/80 mt-1">Phone: +91-9811013981, +91-9310465077</p>
+              <h3 className="font-heading text-xl md:text-2xl font-bold text-[#D4AF37] mb-3">Head Office</h3>
+              <p className="text-sm md:text-base text-white/80">A 264, SURJAMLA VIHAR , DELHI 110092</p>
+              <p className="text-sm md:text-base text-white/80 mt-1">Email: LUBECKELEVATOR@GMAIL.COM</p>
+              <p className="text-sm md:text-base text-white/80 mt-1">Phone: +91-9811013981, +91-9310465077</p>
             </div>
             <div>
-              <h3 className="font-heading text-2xl font-bold text-[#D4AF37] mb-3">Branch Offices</h3>
-              <ul className="space-y-1 text-white/80 list-disc list-inside">
+              <h3 className="font-heading text-xl md:text-2xl font-bold text-[#D4AF37] mb-3">Branch Offices</h3>
+              <ul className="space-y-1 text-sm md:text-base text-white/80 list-disc list-inside">
                 {branchOffices.map(office => <li key={office}>{office}</li>)}
               </ul>
             </div>

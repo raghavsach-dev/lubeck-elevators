@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { VideoPlayer } from './components/VideoPlayer';
 
 interface Image {
   src: string;
@@ -22,6 +23,19 @@ const allImages: Image[] = [
   { src: '/Designs/b24307517bb46aab1d479675cb8cbd69.jpg', caption: 'Vibrant and contemporary look with bold colors and patterns.' },
   { src: '/Designs/d32640dded209308e754e4d6ec2b22d4.jpg', caption: 'Understated sophistication with muted tones and clean lines.' },
   { src: '/Designs/efd8c8f9a88131665e567ecaaa20d757.jpg', caption: 'Art deco inspired cabin with geometric patterns and rich textures.' },
+];
+
+const videoPreviews = [
+  {
+    src: '/Videos/PRESIDENTIAL ROSE GOLD DESIGN.mp4',
+    title: 'Presidential Rose Gold Design',
+    description: 'The epitome of elegance. Our Presidential suite cabin in a stunning rose gold finish, combining technology and artistry.'
+  },
+  {
+    src: '/Videos/TRANSPARENT ROSE GOLD.mp4',
+    title: 'Transparent Rose Gold Lift',
+    description: 'A breathtaking panoramic elevator with rose gold accents, offering stunning views and a futuristic feel.'
+  }
 ];
 
 const shuffleArray = (array: Image[]): Image[] => {
@@ -62,7 +76,7 @@ export default function Home() {
           <h1 className="font-heading text-5xl md:text-7xl font-bold mb-6">
             <span className="text-white">Elevating</span> <span className="text-gradient-gold">Excellence</span>
           </h1>
-          <p className="text-lg text-white/80 mb-10 max-w-3xl mx-auto">
+          <p className="text-base md:text-lg text-white/80 mb-10 max-w-3xl mx-auto">
             Experience the pinnacle of vertical transportation. We deliver premium elevator solutions that combine cutting-edge technology with uncompromising luxury.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
@@ -81,23 +95,23 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="font-heading text-4xl md:text-5xl font-bold mb-4">Our <span className="text-[#D4AF37]">Premium Services</span></h2>
-            <p className="text-lg text-white/60 max-w-3xl mx-auto">From installation to maintenance, we provide comprehensive solutions tailored to your needs with unmatched attention to detail.</p>
+            <p className="text-base md:text-lg text-white/60 max-w-3xl mx-auto">From installation to maintenance, we provide comprehensive solutions tailored to your needs with unmatched attention to detail.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-[#1C1C1C] border border-white/10 rounded-xl p-8 text-center transition-all duration-300 transform hover:-translate-y-2 hover:border-[#D4AF37] hover:shadow-[0_10px_40px_rgba(212,175,55,0.15)]">
+            <div className="bg-[#1C1C1C] border border-white/10 rounded-xl p-6 md:p-8 text-center transition-all duration-300 transform hover:-translate-y-2 hover:border-[#D4AF37] hover:shadow-[0_10px_40px_rgba(212,175,55,0.15)]">
               <div className="w-16 h-16 bg-[#D4AF37] rounded-full flex items-center justify-center mx-auto mb-6"><svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M2 21h11.5v-1.5h-10v-15h5.62l1.38 1.38V7.5h1.5v-3.38l-1.38-1.37H2v17zM22 6.5v15H10.5v-15H22m-1.5 1.5h-9v12h9v-12zM5.5 3.5h3.13l-1 1H5.5v-1zm9 3h3v1.5h-3V6.5zm0 3h3v1.5h-3V9.5zm0 3h3v1.5h-3v-1.5z"/></svg></div>
-              <h3 className="font-heading text-2xl font-semibold mb-3">New Installation</h3>
-              <p className="text-white/60">State-of-the-art elevator installations with premium materials and cutting-edge technology.</p>
+              <h3 className="font-heading text-xl md:text-2xl font-semibold mb-3">New Installation</h3>
+              <p className="text-sm md:text-base text-white/60">State-of-the-art elevator installations with premium materials and cutting-edge technology.</p>
             </div>
-            <div className="bg-[#1C1C1C] border border-white/10 rounded-xl p-8 text-center transition-all duration-300 transform hover:-translate-y-2 hover:border-[#D4AF37] hover:shadow-[0_10px_40px_rgba(212,175,55,0.15)]">
+            <div className="bg-[#1C1C1C] border border-white/10 rounded-xl p-6 md:p-8 text-center transition-all duration-300 transform hover:-translate-y-2 hover:border-[#D4AF37] hover:shadow-[0_10px_40px_rgba(212,175,55,0.15)]">
               <div className="w-16 h-16 bg-[#D4AF37] rounded-full flex items-center justify-center mx-auto mb-6"><svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg></div>
-              <h3 className="font-heading text-2xl font-semibold mb-3">Maintenance & Repair</h3>
-              <p className="text-white/60">Comprehensive programs and expert repairs to ensure your elevators operate safely and efficiently.</p>
+              <h3 className="font-heading text-xl md:text-2xl font-semibold mb-3">Maintenance & Repair</h3>
+              <p className="text-sm md:text-base text-white/60">Comprehensive programs and expert repairs to ensure your elevators operate safely and efficiently.</p>
             </div>
-            <div className="bg-[#1C1C1C] border border-white/10 rounded-xl p-8 text-center transition-all duration-300 transform hover:-translate-y-2 hover:border-[#D4AF37] hover:shadow-[0_10px_40px_rgba(212,175,55,0.15)]">
+            <div className="bg-[#1C1C1C] border border-white/10 rounded-xl p-6 md:p-8 text-center transition-all duration-300 transform hover:-translate-y-2 hover:border-[#D4AF37] hover:shadow-[0_10px_40px_rgba(212,175,55,0.15)]">
               <div className="w-16 h-16 bg-[#D4AF37] rounded-full flex items-center justify-center mx-auto mb-6"><svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.5 15l-3.5-3.5 1.41-1.41L10.5 13.17l5.59-5.59L17.5 9l-7 7z"/></svg></div>
-              <h3 className="font-heading text-2d font-semibold mb-3">Modernization</h3>
-              <p className="text-white/60">Transform your existing elevators with modern technology, improved efficiency, and enhanced safety.</p>
+              <h3 className="font-heading text-xl md:text-2xl font-semibold mb-3">Modernization</h3>
+              <p className="text-sm md:text-base text-white/60">Transform your existing elevators with modern technology, improved efficiency, and enhanced safety.</p>
             </div>
           </div>
         </div>
@@ -107,16 +121,16 @@ export default function Home() {
       <section id="about-snippet" className="py-20 bg-black">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="pr-8">
+            <div className="md:pr-8 text-center md:text-left">
               <h2 className="font-heading text-4xl md:text-5xl font-bold mb-4">About <span className="text-[#D4AF37]">Lubeck</span></h2>
-              <p className="text-lg text-white/80 mb-6 leading-relaxed">
+              <p className="text-base md:text-lg text-white/80 mb-6 leading-relaxed">
                 Founded on the principles of innovation and excellence, Lubeck Elevators has been a leader in the vertical transportation industry for over two decades. We are dedicated to delivering superior quality, safety, and reliability in every project.
               </p>
               <Link href="/about" className="px-8 py-3 bg-transparent text-[#D4AF37] font-semibold rounded-lg border-2 border-[#D4AF37] transition-all duration-300 hover:bg-[#D4AF37] hover:text-black transform hover:-translate-y-1">
                 Read More
               </Link>
             </div>
-             <div className="rounded-xl overflow-hidden shadow-2xl h-80">
+             <div className="rounded-xl overflow-hidden shadow-2xl h-80 order-first md:order-last">
           <Image
                 src="/lift-sample.jpg" 
                 alt="Lubeck elevator interior" 
@@ -134,9 +148,9 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="font-heading text-4xl md:text-5xl font-bold mb-4">Our <span className="text-[#D4AF37]">Gallery</span></h2>
-            <p className="text-lg text-white/60 max-w-3xl mx-auto">Explore a selection of our finest elevator designs, where innovation meets luxury.</p>
+            <p className="text-base md:text-lg text-white/60 max-w-3xl mx-auto">Explore a selection of our finest elevator designs, where innovation meets luxury.</p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {galleryImages.map((image, index) => (
               <div key={index} className="group relative overflow-hidden rounded-xl border border-white/10 transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4AF37]/20 hover:scale-105">
                 <Image 
@@ -156,6 +170,26 @@ export default function Home() {
           <div className="mt-12 text-center">
             <Link href="/gallery" className="px-8 py-3 bg-[#D4AF37] text-black font-semibold rounded-lg transition-all duration-300 hover:bg-[#FFD700] hover:scale-105">
               See More
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Video Showcase Section */}
+      <section id="video-showcase" className="py-20 bg-black">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="font-heading text-4xl md:text-5xl font-bold mb-4">Video <span className="text-[#D4AF37]">Showcase</span></h2>
+            <p className="text-base md:text-lg text-white/60 max-w-3xl mx-auto">Watch our elevators in action and see the future of vertical transportation.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            {videoPreviews.map((video, index) => (
+                <VideoPlayer key={index} src={video.src} title={video.title} description={video.description} />
+            ))}
+          </div>
+          <div className="mt-12 text-center">
+            <Link href="/videos" className="px-8 py-3 bg-[#D4AF37] text-black font-semibold rounded-lg transition-all duration-300 hover:bg-[#FFD700] hover:scale-105">
+              Watch More
             </Link>
           </div>
         </div>

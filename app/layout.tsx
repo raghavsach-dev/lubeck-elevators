@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import WhatsAppPopup from "./components/WhatsAppPopup";
+import ChatbotPopup from "./components/ChatbotPopup";
 import "./globals.css";
 
 export default function RootLayout({
@@ -13,6 +13,7 @@ export default function RootLayout({
 }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,11 +31,21 @@ export default function RootLayout({
     { name: 'Home Lift', href: '/products/home' },
     { name: 'Structure Lift', href: '/products/structure' },
   ];
+
+  const allLinks = [
+    { name: 'Home', href: '/' },
+    { name: 'About Us', href: '/about' },
+    { name: 'Products', href: '/products/passenger', subLinks: productLinks },
+    { name: 'Gallery', href: '/gallery' },
+    { name: 'Videos', href: '/videos' },
+    { name: 'Clientage', href: '/clientage' },
+    { name: 'Certifications', href: '/certifications' },
+  ];
   
   return (
     <html lang="en">
-      <body>
-        <nav className={`fixed top-0 w-full z-50 transition-colors duration-500 ${isScrolled ? 'bg-black border-b border-white/10' : 'bg-transparent'}`}>
+      <body className={mobileMenuOpen ? 'overflow-hidden' : ''}>
+        <nav className={`fixed top-0 w-full z-50 transition-colors duration-500 ${isScrolled || mobileMenuOpen ? 'bg-black border-b border-white/10' : 'bg-transparent'}`}>
           <div className="max-w-7xl mx-auto px-6 py-3">
             <div className="flex items-center justify-between">
               <Link href="/" className="flex items-center space-x-4">
@@ -44,6 +55,7 @@ export default function RootLayout({
                   <div className="text-xs text-white/70">Lifting With Luxury</div>
                 </div>
               </Link>
+              {/* Desktop Nav */}
               <div className="hidden md:flex items-center space-x-6">
                 <Link href="/" className="hover:text-[#D4AF37] transition-colors duration-300">Home</Link>
                 <Link href="/about" className="hover:text-[#D4AF37] transition-colors duration-300">About Us</Link>
@@ -66,13 +78,29 @@ export default function RootLayout({
                 <Link href="/certifications" className="hover:text-[#D4AF37] transition-colors duration-300">Certifications</Link>
                 <Link href="/contact" className="px-5 py-2 bg-[#D4AF37] text-black font-semibold rounded-md transition-all duration-300 hover:bg-[#FFD700] hover:shadow-[0_0_20px_rgba(255,215,0,0.5)]">Contact Us</Link>
               </div>
+              {/* Mobile Menu Button */}
+              <div className="md:hidden">
+                <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={mobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}></path></svg>
+                </button>
+              </div>
             </div>
           </div>
         </nav>
+
+        {/* Mobile Menu */}
+        <div className={`fixed inset-0 bg-black z-40 pt-24 transition-transform duration-500 ease-in-out md:hidden ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+          <div className="flex flex-col items-center justify-center h-full space-y-6 text-2xl font-heading">
+            {allLinks.map(link => (
+              <Link key={link.href} href={link.href} onClick={() => setMobileMenuOpen(false)} className="hover:text-[#D4AF37] transition-colors duration-300">{link.name}</Link>
+            ))}
+            <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="mt-4 px-8 py-3 bg-[#D4AF37] text-black font-semibold rounded-md">Contact Us</Link>
+          </div>
+        </div>
         
         <main>{children}</main>
 
-        <WhatsAppPopup />
+        <ChatbotPopup />
         
         <footer className="bg-black border-t border-white/10 py-8">
           <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-white/60">
