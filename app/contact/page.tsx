@@ -1,0 +1,82 @@
+'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
+
+export default function ContactPage() {
+  const branchOffices = [
+    "NOIDA SEC 135",
+    "HALDWANI",
+    "JODHPUR, RAJASTHAN",
+    "MANALI",
+    "GURUGRAM",
+    "FARIDABAD",
+  ];
+
+  const [isMapLoading, setMapLoading] = useState(true);
+
+  return (
+    <div className="bg-black text-white min-h-screen pt-32 pb-20">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center">
+          <h1 className="font-heading text-5xl md:text-6xl font-bold text-[#D4AF37]">Contact Us</h1>
+          <p className="text-lg text-white/70 mt-4 max-w-3xl mx-auto">Get in touch with us for a free consultation.</p>
+        </div>
+
+        <div className="mt-16 grid md:grid-cols-2 gap-12">
+          {/* Contact Form */}
+          <div className="bg-[#1C1C1C] p-8 rounded-lg border border-white/10">
+            <h2 className="font-heading text-3xl font-bold mb-6">Send us a Message</h2>
+            <form action="#" method="POST" className="space-y-6">
+              <div>
+                <label htmlFor="name" className="sr-only">Name</label>
+                <input type="text" name="name" id="name" placeholder="Your Name" className="w-full bg-black/50 border border-white/20 rounded-md p-3 focus:ring-[#D4AF37] focus:border-[#D4AF37]" />
+              </div>
+              <div>
+                <label htmlFor="email" className="sr-only">Email</label>
+                <input type="email" name="email" id="email" placeholder="Your Email" className="w-full bg-black/50 border border-white/20 rounded-md p-3 focus:ring-[#D4AF37] focus:border-[#D4AF37]" />
+              </div>
+              <div>
+                <label htmlFor="message" className="sr-only">Message</label>
+                <textarea name="message" id="message" rows={4} placeholder="Your Message" className="w-full bg-black/50 border border-white/20 rounded-md p-3 focus:ring-[#D4AF37] focus:border-[#D4AF37]"></textarea>
+              </div>
+              <button type="submit" className="w-full px-8 py-3 bg-[#D4AF37] text-black font-semibold rounded-lg transition-all duration-300 hover:bg-[#FFD700]">Send Message</button>
+            </form>
+          </div>
+
+          {/* Contact Details */}
+          <div className="space-y-8">
+            <div>
+              <h3 className="font-heading text-2xl font-bold text-[#D4AF37] mb-3">Head Office</h3>
+              <p className="text-white/80">A 264, SURJAMLA VIHAR , DELHI 110092</p>
+              <p className="text-white/80 mt-1">Email: LUBECKELEVATOR@GMAIL.COM</p>
+              <p className="text-white/80 mt-1">Phone: +91-9811013981, +91-9310465077</p>
+            </div>
+            <div>
+              <h3 className="font-heading text-2xl font-bold text-[#D4AF37] mb-3">Branch Offices</h3>
+              <ul className="space-y-1 text-white/80 list-disc list-inside">
+                {branchOffices.map(office => <li key={office}>{office}</li>)}
+              </ul>
+            </div>
+            <div className="relative h-64 w-full rounded-lg overflow-hidden bg-[#1C1C1C]">
+              {isMapLoading && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-[#D4AF37]"></div>
+                </div>
+              )}
+               <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.064751574877!2d77.28735979999999!3d28.657779800000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfb0e4bda55f3%3A0xb876c6112cdd1222!2sLubeck%20Elevators!5e0!3m2!1sen!2sin!4v1751016357089!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                style={{ border: 0, visibility: isMapLoading ? 'hidden' : 'visible' }}
+                allowFullScreen={true}
+                referrerPolicy="no-referrer-when-downgrade"
+                onLoad={() => setMapLoading(false)}
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+} 

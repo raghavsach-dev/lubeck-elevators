@@ -1,103 +1,186 @@
+"use client";
+
 import Image from "next/image";
+import Link from 'next/link';
+import { useState, useEffect } from 'react';
+
+const allImages = [
+  { src: '/Designs/9d4b2b9da404f11fa7df56272cde503c.jpg', caption: 'Elegant wood-paneled interior with ambient lighting.' },
+  { src: '/Designs/24da2f83a945c0930141f1105f89005c.jpg', caption: 'Sleek, futuristic design with integrated LED display.' },
+  { src: '/Designs/da3f9a502b528f166209894b998a6794.jpg', caption: 'Minimalist interior featuring brushed metal and glass.' },
+  { src: '/Designs/d702a70ab6fdca1c49c5ca7b05e942ba.jpg', caption: 'Spacious and accessible design, perfect for commercial use.' },
+  { src: '/Designs/e667214d993fa4d1ebb4a39f8264e753.jpg', caption: 'Luxurious gold-accented cabin for a premium experience.' },
+  { src: '/Designs/f3f633de0f0b3597bc5f43eb4e9bc68d.jpg', caption: 'Modern design combining functionality with high-end aesthetics.' },
+  { src: '/Designs/57a751ae5177f201965c52846a7d41c5.jpg', caption: 'Classic elegance with polished marble and ornate details.' },
+  { src: '/Designs/81be1a2070bedbe959b8eaa5446cd395.jpg', caption: 'High-tech cabin with panoramic glass walls for stunning views.' },
+  { src: '/Designs/44eeea10436060595609ebb253d000fb.jpg', caption: 'Robust and functional design for industrial applications.' },
+  { src: '/Designs/b24307517bb46aab1d479675cb8cbd69.jpg', caption: 'Vibrant and contemporary look with bold colors and patterns.' },
+  { src: '/Designs/d32640dded209308e754e4d6ec2b22d4.jpg', caption: 'Understated sophistication with muted tones and clean lines.' },
+  { src: '/Designs/efd8c8f9a88131665e567ecaaa20d757.jpg', caption: 'Art deco inspired cabin with geometric patterns and rich textures.' },
+];
+
+const shuffleArray = (array) => {
+  let currentIndex = array.length, randomIndex;
+
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+};
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
+  const [galleryImages, setGalleryImages] = useState([]);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  useEffect(() => {
+    const handleScroll = () => {
+      // Set to true if scrolled more than 50px, for example
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    setGalleryImages(shuffleArray([...allImages]).slice(0, 3));
+
+    // Cleanup function to remove the event listener
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const productLinks = [
+    { name: 'Passenger Elevator', href: '/products/passenger' },
+    { name: 'Hospital Elevator', href: '/products/hospital' },
+    { name: 'Capsule Lifts', href: '/products/capsule' },
+    { name: 'Goods Lift', href: '/products/goods' },
+    { name: 'Home Lift', href: '/products/home' },
+    { name: 'Structure Lift', href: '/products/structure' },
+  ];
+
+  return (
+    <>
+      {/* Hero Section */}
+      <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+          className="absolute z-0 w-full h-full object-cover"
+        >
+          <source src="/Final.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div className="absolute inset-0 bg-black/50 z-10"></div>
+        <div className="relative z-20 max-w-4xl mx-auto px-6 text-center">
+          <h1 className="font-heading text-5xl md:text-7xl font-bold mb-6">
+            <span className="text-white">Elevating</span> <span className="text-gradient-gold">Excellence</span>
+          </h1>
+          <p className="text-lg text-white/80 mb-10 max-w-3xl mx-auto">
+            Experience the pinnacle of vertical transportation. We deliver premium elevator solutions that combine cutting-edge technology with uncompromising luxury.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <Link href="/contact" className="px-8 py-3 bg-[#D4AF37] text-black font-semibold rounded-lg transition-all duration-300 hover:bg-[#FFD700] hover:shadow-[0_0_30px_rgba(255,215,0,0.6)] transform hover:-translate-y-1">
+              Get a Free Consultation
+            </Link>
+            <Link href="/Main_Catalogue.pdf" target="_blank" rel="noopener noreferrer" className="px-8 py-3 bg-transparent text-[#D4AF37] font-semibold rounded-lg border-2 border-[#D4AF37] transition-all duration-300 hover:bg-[#D4AF37] hover:text-black transform hover:-translate-y-1">
+              View Catalog
+            </Link>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+      </section>
+
+      {/* Services Section */}
+      <section id="services" className="py-20 bg-[#0D0D0D]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="font-heading text-4xl md:text-5xl font-bold mb-4">Our <span className="text-[#D4AF37]">Premium Services</span></h2>
+            <p className="text-lg text-white/60 max-w-3xl mx-auto">From installation to maintenance, we provide comprehensive solutions tailored to your needs with unmatched attention to detail.</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="bg-[#1C1C1C] border border-white/10 rounded-xl p-8 text-center transition-all duration-300 transform hover:-translate-y-2 hover:border-[#D4AF37] hover:shadow-[0_10px_40px_rgba(212,175,55,0.15)]">
+              <div className="w-16 h-16 bg-[#D4AF37] rounded-full flex items-center justify-center mx-auto mb-6"><svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M2 21h11.5v-1.5h-10v-15h5.62l1.38 1.38V7.5h1.5v-3.38l-1.38-1.37H2v17zM22 6.5v15H10.5v-15H22m-1.5 1.5h-9v12h9v-12zM5.5 3.5h3.13l-1 1H5.5v-1zm9 3h3v1.5h-3V6.5zm0 3h3v1.5h-3V9.5zm0 3h3v1.5h-3v-1.5z"/></svg></div>
+              <h3 className="font-heading text-2xl font-semibold mb-3">New Installation</h3>
+              <p className="text-white/60">State-of-the-art elevator installations with premium materials and cutting-edge technology.</p>
+            </div>
+            <div className="bg-[#1C1C1C] border border-white/10 rounded-xl p-8 text-center transition-all duration-300 transform hover:-translate-y-2 hover:border-[#D4AF37] hover:shadow-[0_10px_40px_rgba(212,175,55,0.15)]">
+              <div className="w-16 h-16 bg-[#D4AF37] rounded-full flex items-center justify-center mx-auto mb-6"><svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg></div>
+              <h3 className="font-heading text-2xl font-semibold mb-3">Maintenance & Repair</h3>
+              <p className="text-white/60">Comprehensive programs and expert repairs to ensure your elevators operate safely and efficiently.</p>
+            </div>
+            <div className="bg-[#1C1C1C] border border-white/10 rounded-xl p-8 text-center transition-all duration-300 transform hover:-translate-y-2 hover:border-[#D4AF37] hover:shadow-[0_10px_40px_rgba(212,175,55,0.15)]">
+              <div className="w-16 h-16 bg-[#D4AF37] rounded-full flex items-center justify-center mx-auto mb-6"><svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.5 15l-3.5-3.5 1.41-1.41L10.5 13.17l5.59-5.59L17.5 9l-7 7z"/></svg></div>
+              <h3 className="font-heading text-2d font-semibold mb-3">Modernization</h3>
+              <p className="text-white/60">Transform your existing elevators with modern technology, improved efficiency, and enhanced safety.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Us Snippet Section */}
+      <section id="about-snippet" className="py-20 bg-black">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="pr-8">
+              <h2 className="font-heading text-4xl md:text-5xl font-bold mb-4">About <span className="text-[#D4AF37]">Lubeck</span></h2>
+              <p className="text-lg text-white/80 mb-6 leading-relaxed">
+                Founded on the principles of innovation and excellence, Lubeck Elevators has been a leader in the vertical transportation industry for over two decades. We are dedicated to delivering superior quality, safety, and reliability in every project.
+              </p>
+              <Link href="/about" className="px-8 py-3 bg-transparent text-[#D4AF37] font-semibold rounded-lg border-2 border-[#D4AF37] transition-all duration-300 hover:bg-[#D4AF37] hover:text-black transform hover:-translate-y-1">
+                Read More
+              </Link>
+            </div>
+             <div className="rounded-xl overflow-hidden shadow-2xl h-80">
           <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+                src="/lift-sample.jpg" 
+                alt="Lubeck elevator interior" 
+                width={600} 
+                height={400}
+                className="object-cover w-full h-full"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery Snippet Section */}
+      <section id="gallery-snippet" className="py-20 bg-[#0D0D0D]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="font-heading text-4xl md:text-5xl font-bold mb-4">Our <span className="text-[#D4AF37]">Gallery</span></h2>
+            <p className="text-lg text-white/60 max-w-3xl mx-auto">Explore a selection of our finest elevator designs, where innovation meets luxury.</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {galleryImages.map((image, index) => (
+              <div key={index} className="group relative overflow-hidden rounded-xl border border-white/10 transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4AF37]/20 hover:scale-105">
+                <Image 
+                  src={image.src} 
+                  alt={image.caption}
+                  width={400} 
+                  height={600} 
+                  className="object-cover w-full h-96 transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute bottom-0 left-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <p className="text-white text-lg font-semibold transform-gpu translate-y-4 group-hover:translate-y-0 transition-transform duration-500">{image.caption}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-12 text-center">
+            <Link href="/gallery" className="px-8 py-3 bg-[#D4AF37] text-black font-semibold rounded-lg transition-all duration-300 hover:bg-[#FFD700] hover:scale-105">
+              See More
+            </Link>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

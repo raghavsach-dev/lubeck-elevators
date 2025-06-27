@@ -1,0 +1,69 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import Image from 'next/image';
+
+const allImages = [
+  { src: '/Designs/9d4b2b9da404f11fa7df56272cde503c.jpg', caption: 'Elegant wood-paneled interior with ambient lighting.' },
+  { src: '/Designs/24da2f83a945c0930141f1105f89005c.jpg', caption: 'Sleek, futuristic design with integrated LED display.' },
+  { src: '/Designs/da3f9a502b528f166209894b998a6794.jpg', caption: 'Minimalist interior featuring brushed metal and glass.' },
+  { src: '/Designs/d702a70ab6fdca1c49c5ca7b05e942ba.jpg', caption: 'Spacious and accessible design, perfect for commercial use.' },
+  { src: '/Designs/e667214d993fa4d1ebb4a39f8264e753.jpg', caption: 'Luxurious gold-accented cabin for a premium experience.' },
+  { src: '/Designs/f3f633de0f0b3597bc5f43eb4e9bc68d.jpg', caption: 'Modern design combining functionality with high-end aesthetics.' },
+  { src: '/Designs/57a751ae5177f201965c52846a7d41c5.jpg', caption: 'Classic elegance with polished marble and ornate details.' },
+  { src: '/Designs/81be1a2070bedbe959b8eaa5446cd395.jpg', caption: 'High-tech cabin with panoramic glass walls for stunning views.' },
+  { src: '/Designs/44eeea10436060595609ebb253d000fb.jpg', caption: 'Robust and functional design for industrial applications.' },
+  { src: '/Designs/b24307517bb46aab1d479675cb8cbd69.jpg', caption: 'Vibrant and contemporary look with bold colors and patterns.' },
+  { src: '/Designs/d32640dded209308e754e4d6ec2b22d4.jpg', caption: 'Understated sophistication with muted tones and clean lines.' },
+  { src: '/Designs/efd8c8f9a88131665e567ecaaa20d757.jpg', caption: 'Art deco inspired cabin with geometric patterns and rich textures.' },
+];
+
+// Function to shuffle an array
+const shuffleArray = (array) => {
+  let currentIndex = array.length, randomIndex;
+
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+};
+
+export default function GalleryPage() {
+  const [shuffledImages, setShuffledImages] = useState([]);
+
+  useEffect(() => {
+    setShuffledImages(shuffleArray([...allImages]));
+  }, []);
+
+  return (
+    <div className="bg-black text-white min-h-screen pt-32 pb-20">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <h1 className="font-heading text-5xl md:text-6xl font-bold text-[#D4AF37]">Our Designs</h1>
+          <p className="text-lg text-white/70 mt-4 max-w-3xl mx-auto">A showcase of our finest elevator interior designs, blending artistry with engineering.</p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {shuffledImages.map((image, index) => (
+            <div key={index} className="group relative overflow-hidden rounded-xl border border-white/10 transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4AF37]/20 hover:scale-105">
+              <Image 
+                src={image.src} 
+                alt={image.caption}
+                width={400} 
+                height={600} 
+                className="object-cover w-full h-96 transition-transform duration-500 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute bottom-0 left-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <p className="text-white text-lg font-semibold transform-gpu translate-y-4 group-hover:translate-y-0 transition-transform duration-500">{image.caption}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+} 
