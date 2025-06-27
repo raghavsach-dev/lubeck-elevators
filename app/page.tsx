@@ -4,6 +4,12 @@ import Image from "next/image";
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { VideoPlayer } from './components/VideoPlayer';
+import dynamic from 'next/dynamic';
+
+const PdfViewerPopup = dynamic(() => import('./components/PdfViewerPopup'), {
+    ssr: false,
+    loading: () => <div className="fixed inset-0 bg-black/90 z-[100] flex items-center justify-center"><div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-[#D4AF37]"></div></div> 
+});
 
 interface Image {
   src: string;
@@ -50,8 +56,15 @@ const shuffleArray = (array: Image[]): Image[] => {
   return array;
 };
 
+const LoadingSpinner = () => (
+    <div className="flex justify-center items-center h-full">
+      <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-[#D4AF37]"></div>
+    </div>
+);
+
 export default function Home() {
   const [galleryImages, setGalleryImages] = useState<Image[]>([]);
+  const [isCatalogOpen, setIsCatalogOpen] = useState(false);
 
   useEffect(() => {
     setGalleryImages(shuffleArray([...allImages]).slice(0, 3));
@@ -79,13 +92,16 @@ export default function Home() {
           <p className="text-base md:text-lg text-white/80 mb-10 max-w-3xl mx-auto">
             Experience the pinnacle of vertical transportation. We deliver premium elevator solutions that combine cutting-edge technology with uncompromising luxury.
           </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <Link href="/contact" className="px-8 py-3 bg-[#D4AF37] text-black font-semibold rounded-lg transition-all duration-300 hover:bg-[#FFD700] hover:shadow-[0_0_30px_rgba(255,215,0,0.6)] transform hover:-translate-y-1">
-              Get a Free Consultation
+          <div className="flex justify-center items-center gap-4">
+            <Link href="/contact" className="px-8 py-3 bg-[#D4AF37] text-black font-semibold rounded-md transition-all duration-300 hover:bg-[#FFD700] hover:shadow-[0_0_20px_rgba(255,215,0,0.5)]">
+              Request a Quote
             </Link>
-            <Link href="/Main_Catalogue.pdf" target="_blank" rel="noopener noreferrer" className="px-8 py-3 bg-transparent text-[#D4AF37] font-semibold rounded-lg border-2 border-[#D4AF37] transition-all duration-300 hover:bg-[#D4AF37] hover:text-black transform hover:-translate-y-1">
+            <button
+              onClick={() => setIsCatalogOpen(true)}
+              className="px-8 py-3 bg-transparent border border-white/50 text-white font-semibold rounded-md transition-all duration-300 hover:bg-white/10 hover:border-white"
+            >
               View Catalog
-            </Link>
+            </button>
           </div>
         </div>
       </section>
@@ -194,6 +210,13 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {isCatalogOpen && (
+        <PdfViewerPopup 
+          file="/Main_Catalogue.pdf" 
+          onClose={() => setIsCatalogOpen(false)} 
+        />
+      )}
     </>
   );
 }

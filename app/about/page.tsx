@@ -19,7 +19,7 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="order-first md:order-last">
-            <Image src="/logo.jpeg" alt="Lubeck Elevators" width={500} height={500} className="rounded-xl mx-auto" />
+            <Image src="/liftdesign.jpg" alt="Lubeck Elevators" width={500} height={500} className="rounded-xl mx-auto" />
           </div>
         </div>
 
