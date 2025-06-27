@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef, useEffect, JSX } from "react";
+import React from 'react';
 import { MessageSquare, X, Send, Bot, User } from 'lucide-react';
 import Link from 'next/link';
 
@@ -84,13 +85,13 @@ export default function ChatbotPopup() {
             } else {
                  throw new Error("Not a special intent.");
             }
-        } catch (parseError) {
+        } catch {
              botMessage = { role: 'model', content: data.text || "I'm sorry, I encountered an issue. Please try again." };
         }
         
         setMessages(prev => [...prev, botMessage]);
 
-    } catch (error) {
+    } catch {
         const errorMessage: Message = { role: 'model', content: "Sorry, I'm having trouble connecting right now. Please try again later."};
         setMessages(prev => [...prev, errorMessage]);
     } finally {
