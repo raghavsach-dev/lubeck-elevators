@@ -25,8 +25,14 @@ const LoadingSpinner = () => (
   </div>
 );
 
-const PDFViewerModal = ({ file, onClose, name }) => {
-  const [numPages, setNumPages] = useState(null);
+interface PDFViewerModalProps {
+  file: string;
+  name: string;
+  onClose: () => void;
+}
+
+const PDFViewerModal = ({ file, onClose, name }: PDFViewerModalProps) => {
+  const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [isClosing, setIsClosing] = useState(false);
 
@@ -41,13 +47,17 @@ const PDFViewerModal = ({ file, onClose, name }) => {
     setIsClosing(true);
   };
 
-  function onDocumentLoadSuccess({ numPages }) {
+  function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
     setNumPages(numPages);
     setPageNumber(1);
   }
 
   const goToPrevPage = () => setPageNumber(pageNumber - 1 > 0 ? pageNumber - 1 : 1);
-  const goToNextPage = () => setPageNumber(pageNumber + 1 <= numPages ? pageNumber + 1 : numPages);
+  const goToNextPage = () => {
+    if (numPages) {
+      setPageNumber(pageNumber + 1 <= numPages ? pageNumber + 1 : numPages);
+    }
+  };
 
   return (
     <div className={`fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 transition-opacity duration-300 ${isClosing ? 'opacity-0' : 'opacity-100'}`} onClick={handleClose}>
@@ -65,7 +75,7 @@ const PDFViewerModal = ({ file, onClose, name }) => {
                 </div>
             </Document>
         </div>
-        {numPages > 1 && (
+        {numPages && numPages > 1 && (
             <footer className="flex items-center justify-center p-2 border-t border-white/10 bg-[#111111]">
                 <button onClick={goToPrevPage} disabled={pageNumber <= 1} className="p-2 rounded-full disabled:opacity-50 disabled:cursor-not-allowed text-white hover:bg-white/10 transition-colors">
                     <ChevronLeft size={24} />
@@ -84,10 +94,10 @@ const PDFViewerModal = ({ file, onClose, name }) => {
 };
 
 export default function CertificationsClient() {
-  const [selectedPdf, setSelectedPdf] = useState(null);
+  const [selectedPdf, setSelectedPdf] = useState<{ name: string; file: string; } | null>(null);
 
   useEffect(() => {
-    const handleEsc = (event) => {
+    const handleEsc = (event: KeyboardEvent) => {
        if (event.key === 'Escape') {
         setSelectedPdf(null);
        }
@@ -133,7 +143,7 @@ export default function CertificationsClient() {
 
           <div className="text-center mt-20 max-w-3xl mx-auto">
             <p className="text-2xl font-heading text-white/70 italic">
-              "Certified excellence, engineered for your peace of mind."
+              &quot;Certified excellence, engineered for your peace of mind.&quot;
             </p>
           </div>
         </div>

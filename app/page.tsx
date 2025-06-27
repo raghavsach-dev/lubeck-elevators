@@ -4,7 +4,12 @@ import Image from "next/image";
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
-const allImages = [
+interface Image {
+  src: string;
+  caption: string;
+}
+
+const allImages: Image[] = [
   { src: '/Designs/9d4b2b9da404f11fa7df56272cde503c.jpg', caption: 'Elegant wood-paneled interior with ambient lighting.' },
   { src: '/Designs/24da2f83a945c0930141f1105f89005c.jpg', caption: 'Sleek, futuristic design with integrated LED display.' },
   { src: '/Designs/da3f9a502b528f166209894b998a6794.jpg', caption: 'Minimalist interior featuring brushed metal and glass.' },
@@ -19,7 +24,7 @@ const allImages = [
   { src: '/Designs/efd8c8f9a88131665e567ecaaa20d757.jpg', caption: 'Art deco inspired cabin with geometric patterns and rich textures.' },
 ];
 
-const shuffleArray = (array) => {
+const shuffleArray = (array: Image[]): Image[] => {
   let currentIndex = array.length, randomIndex;
 
   while (currentIndex !== 0) {
@@ -32,37 +37,11 @@ const shuffleArray = (array) => {
 };
 
 export default function Home() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [productsOpen, setProductsOpen] = useState(false);
-  const [galleryImages, setGalleryImages] = useState([]);
+  const [galleryImages, setGalleryImages] = useState<Image[]>([]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      // Set to true if scrolled more than 50px, for example
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
     setGalleryImages(shuffleArray([...allImages]).slice(0, 3));
-
-    // Cleanup function to remove the event listener
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
   }, []);
-
-  const productLinks = [
-    { name: 'Passenger Elevator', href: '/products/passenger' },
-    { name: 'Hospital Elevator', href: '/products/hospital' },
-    { name: 'Capsule Lifts', href: '/products/capsule' },
-    { name: 'Goods Lift', href: '/products/goods' },
-    { name: 'Home Lift', href: '/products/home' },
-    { name: 'Structure Lift', href: '/products/structure' },
-  ];
 
   return (
     <>

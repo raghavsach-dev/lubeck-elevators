@@ -18,8 +18,13 @@ const allImages = [
   { src: '/Designs/efd8c8f9a88131665e567ecaaa20d757.jpg', caption: 'Art deco inspired cabin with geometric patterns and rich textures.' },
 ];
 
+interface Image {
+  src: string;
+  caption: string;
+}
+
 // Function to shuffle an array
-const shuffleArray = (array) => {
+const shuffleArray = (array: Image[]): Image[] => {
   let currentIndex = array.length, randomIndex;
 
   while (currentIndex !== 0) {
@@ -32,7 +37,7 @@ const shuffleArray = (array) => {
 };
 
 export default function GalleryPage() {
-  const [shuffledImages, setShuffledImages] = useState([]);
+  const [shuffledImages, setShuffledImages] = useState<Image[]>([]);
 
   useEffect(() => {
     setShuffledImages(shuffleArray([...allImages]));

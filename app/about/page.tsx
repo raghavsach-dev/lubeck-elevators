@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import Image from 'next/image';
 
 export default function AboutPage() {
@@ -13,7 +12,7 @@ export default function AboutPage() {
         <div className="mt-16 grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6 text-lg text-white/80">
             <p>
-              LUBECK ELEVATORS is one of the world's leading quality assured elevators company based in India, established in the year 2009. We are a well-known household name in lift manufacturing, engaged in the design and production of Passenger Elevators, Home Elevators, Goods Elevators, and much more.
+              LUBECK ELEVATORS is one of the world&apos;s leading quality assured elevators company based in India, established in the year 2009. We are a well-known household name in lift manufacturing, engaged in the design and production of Passenger Elevators, Home Elevators, Goods Elevators, and much more.
             </p>
             <p>
               With more than 750 systems delivered, we design, build, and install award-worthy elevators, especially for your needs, offering solutions for both Residential and Commercial properties.
@@ -25,7 +24,7 @@ export default function AboutPage() {
         </div>
 
         <div className="mt-20">
-          <h2 className="font-heading text-4xl font-bold text-center mb-12">Why Choose <span className="text-[#D4AF37]">Lubeck?</span></h2>
+          <h2 className="font-heading text-4xl font-bold text-center mb-12">Why Choose <span className="text-[#D4AF37]">Lubeck</span></h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <FeatureCard title="Customized For You" description="Get your lift customized according to your exact needs and building specifications." />
             <FeatureCard title="Ultra Premium Luxury Cabins" description="Experience true luxury with our high-end, modern designer steel sheets and cabin interiors." />
