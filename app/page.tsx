@@ -56,12 +56,6 @@ const shuffleArray = (array: Image[]): Image[] => {
   return array;
 };
 
-const LoadingSpinner = () => (
-    <div className="flex justify-center items-center h-full">
-      <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-[#D4AF37]"></div>
-    </div>
-);
-
 export default function Home() {
   const [galleryImages, setGalleryImages] = useState<Image[]>([]);
   const [isCatalogOpen, setIsCatalogOpen] = useState(false);
