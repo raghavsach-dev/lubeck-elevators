@@ -186,6 +186,7 @@ export default function Home() {
       </section>
 
       {/* Video Showcase Section */}
+      {/*
       <section id="video-showcase" className="py-20 bg-black">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
@@ -204,6 +205,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      */}
 
       {isCatalogOpen && (
         <PdfViewerPopup 
