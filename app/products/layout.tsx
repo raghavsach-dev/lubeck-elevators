@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 const products = [
   { name: 'Passenger Elevator', path: '/products/passenger' },
@@ -11,8 +12,18 @@ const products = [
 
 export default function ProductsLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-black pt-32 pb-20 text-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <div className="relative min-h-screen bg-black pt-32 pb-20 text-white">
+       <div className="absolute inset-0 z-0">
+        <Image
+          src="/liftdesign.jpg"
+          alt="Lubeck Elevators background"
+          layout="fill"
+          objectFit="cover"
+          quality={100}
+        />
+        <div className="absolute inset-0 bg-black opacity-80" />
+      </div>
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
         <div className="md:flex">
           <aside className="w-full md:w-1/4 md:pr-8 mb-10 md:mb-0">
             <h2 className="font-heading text-2xl md:text-3xl text-[#D4AF37] mb-4">Our Products</h2>

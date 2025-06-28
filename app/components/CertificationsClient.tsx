@@ -5,6 +5,7 @@ import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
 import { Eye, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import Image from 'next/image';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   'pdfjs-dist/build/pdf.worker.min.mjs',
@@ -111,8 +112,18 @@ export default function CertificationsClient() {
 
   return (
     <>
-      <div className="bg-black text-white min-h-screen pt-32 pb-20">
-        <div className="max-w-7xl mx-auto px-6">
+      <div className="relative bg-black text-white min-h-screen pt-32 pb-20">
+        <div className="absolute inset-0 z-0">
+            <Image
+            src="/liftdesign.jpg"
+            alt="Lubeck Elevators background"
+            layout="fill"
+            objectFit="cover"
+            quality={100}
+            />
+            <div className="absolute inset-0 bg-black opacity-80" />
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h1 className="font-heading text-4xl md:text-6xl font-bold text-[#D4AF37]">Our Certifications</h1>
             <p className="text-base md:text-lg text-white/70 mt-4 max-w-3xl mx-auto">
