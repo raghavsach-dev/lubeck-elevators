@@ -44,8 +44,18 @@ export default function GalleryPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black pt-32 pb-20">
-      <div className="max-w-7xl mx-auto px-6">
+    <div className="relative min-h-screen bg-black pt-32 pb-20">
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/liftdesign.jpg"
+          alt="Lubeck Elevators background"
+          layout="fill"
+          objectFit="cover"
+          quality={100}
+        />
+        <div className="absolute inset-0 bg-black opacity-80" />
+      </div>
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h1 className="font-heading text-4xl md:text-6xl font-bold text-[#D4AF37]">Our Gallery</h1>
           <p className="text-base md:text-lg text-white/70 mt-4 max-w-3xl mx-auto">

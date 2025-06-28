@@ -74,3 +74,34 @@ h1, h2, h3, h4, h5, h6 {
 .chat-scrollbar::-webkit-scrollbar-thumb:hover {
   background-color: #FFD700;
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* ... existing code ... */
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll linear infinite;
+}
+
+.animate-scroll:has(.group:hover) {
+  animation-play-state: paused;
+}

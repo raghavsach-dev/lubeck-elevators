@@ -2,24 +2,31 @@ import Image from 'next/image';
 
 export default function AboutPage() {
   return (
-    <div className="bg-black text-white min-h-screen pt-32 pb-20">
-      <div className="max-w-7xl mx-auto px-6">
+    <div className="relative bg-black text-white min-h-screen pt-32 pb-20">
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/liftdesign.jpg"
+          alt="Lubeck Elevators background"
+          layout="fill"
+          objectFit="cover"
+          quality={100}
+        />
+        <div className="absolute inset-0 bg-black opacity-80" />
+      </div>
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
         <div className="text-center">
           <h1 className="font-heading text-4xl md:text-6xl font-bold text-[#D4AF37]">About Lubeck Elevators</h1>
           <p className="text-base md:text-lg text-white/70 mt-4 max-w-3xl mx-auto">Lifting With Luxury Since 2009</p>
         </div>
 
-        <div className="mt-16 grid md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6 text-base md:text-lg text-white/80">
+        <div className="mt-16">
+          <div className="space-y-6 text-base md:text-lg text-white/80 max-w-3xl mx-auto text-center">
             <p>
               LUBECK ELEVATORS is one of the world&apos;s leading quality assured elevators company based in India, established in the year 2009. We are a well-known household name in lift manufacturing, engaged in the design and production of Passenger Elevators, Home Elevators, Goods Elevators, and much more.
             </p>
             <p>
               With more than 750 systems delivered, we design, build, and install award-worthy elevators, especially for your needs, offering solutions for both Residential and Commercial properties.
             </p>
-          </div>
-          <div className="order-first md:order-last">
-            <Image src="/liftdesign.jpg" alt="Lubeck Elevators" width={500} height={500} className="rounded-xl mx-auto" />
           </div>
         </div>
 
