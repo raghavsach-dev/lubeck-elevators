@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { VideoPlayer } from './components/VideoPlayer';
+// import { VideoPlayer } from './components/VideoPlayer';
 import dynamic from 'next/dynamic';
 
 const PdfViewerPopup = dynamic(() => import('./components/PdfViewerPopup'), {
@@ -31,6 +31,7 @@ const allImages: Image[] = [
   { src: '/Designs/efd8c8f9a88131665e567ecaaa20d757.jpg', caption: 'Art deco inspired cabin with geometric patterns and rich textures.' },
 ];
 
+/*
 const videoPreviews = [
   {
     src: '/Videos/PRESIDENTIAL ROSE GOLD DESIGN.mp4',
@@ -43,6 +44,7 @@ const videoPreviews = [
     description: 'A breathtaking panoramic elevator with rose gold accents, offering stunning views and a futuristic feel.'
   }
 ];
+*/
 
 const shuffleArray = (array: Image[]): Image[] => {
   let currentIndex = array.length, randomIndex;
