@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { motion, Variants } from 'framer-motion';
 
 const allImages = [
   { src: '/Designs/9d4b2b9da404f11fa7df56272cde503c.jpg', caption: 'Elegant wood-paneled interior with ambient lighting.' },
@@ -18,13 +19,13 @@ const allImages = [
   { src: '/Designs/efd8c8f9a88131665e567ecaaa20d757.jpg', caption: 'Art deco inspired cabin with geometric patterns and rich textures.' },
 ];
 
-interface Image {
+interface GalleryImage {
   src: string;
   caption: string;
 }
 
 // Function to shuffle an array
-const shuffleArray = (array: Image[]): Image[] => {
+const shuffleArray = (array: GalleryImage[]): GalleryImage[] => {
   let currentIndex = array.length, randomIndex;
 
   while (currentIndex !== 0) {
@@ -37,50 +38,101 @@ const shuffleArray = (array: Image[]): Image[] => {
 };
 
 export default function GalleryPage() {
-  const [shuffledImages, setShuffledImages] = useState<Image[]>([]);
+  const [shuffledImages, setShuffledImages] = useState<GalleryImage[]>([]);
 
   useEffect(() => {
     setShuffledImages(shuffleArray([...allImages]));
   }, []);
+  
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.3, delayChildren: 0.2 },
+    },
+  };
+
+  const itemVariants: Variants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.5, ease: 'easeOut' },
+    },
+  };
+
+  const galleryVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 },
+    },
+  };
 
   return (
-    <div className="relative min-h-screen bg-black pt-32 pb-20">
+    <main className="relative text-white min-h-screen pt-32 pb-20">
       <div className="absolute inset-0 z-0">
         <Image
           src="/liftdesign.jpg"
           alt="Lubeck Elevators background"
-          layout="fill"
-          objectFit="cover"
-          quality={100}
+          fill
+          className="object-cover"
         />
-        <div className="absolute inset-0 bg-black opacity-80" />
+        <div className="absolute inset-0 bg-black/70"></div>
       </div>
       <div className="relative z-10 max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <h1 className="font-heading text-4xl md:text-6xl font-bold text-[#D4AF37]">Our Gallery</h1>
-          <p className="text-base md:text-lg text-white/70 mt-4 max-w-3xl mx-auto">
+        <motion.div 
+          className="text-center mb-16"
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+        >
+          <motion.h1 variants={itemVariants} className="font-heading text-3xl sm:text-4xl md:text-6xl font-bold text-[#D4AF37]">Our Gallery</motion.h1>
+          <motion.p variants={itemVariants} className="text-base md:text-lg text-white/70 mt-4 max-w-3xl mx-auto">
             A showcase of our finest elevator designs, where innovation meets luxury and functionality.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div 
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+          initial="hidden"
+          animate="visible"
+          variants={galleryVariants}
+        >
           {shuffledImages.map((image, index) => (
-            <div key={index} className="group relative overflow-hidden rounded-xl border border-white/10 transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4AF37]/20 hover:scale-105">
-              <Image 
-                src={image.src} 
-                alt={image.caption}
-                width={400} 
-                height={600} 
-                className="object-cover w-full h-96 transition-transform duration-500 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="absolute bottom-0 left-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <p className="text-white text-base md:text-lg font-semibold transform-gpu translate-y-4 group-hover:translate-y-0 transition-transform duration-500">{image.caption}</p>
+            <motion.div key={index} variants={itemVariants}>
+              {/* Mobile and Tablet View: Caption Below Image */}
+              <div className="sm:hidden bg-[#1C1C1C] rounded-xl border border-white/10 overflow-hidden">
+                <Image 
+                  src={image.src} 
+                  alt={image.caption}
+                  width={400} 
+                  height={600} 
+                  className="object-cover w-full h-80"
+                />
+                <div className="p-4">
+                  <p className="text-white text-base font-semibold">{image.caption}</p>
+                </div>
               </div>
-            </div>
+
+              {/* Desktop View: Hover Effect */}
+              <div className="hidden sm:block group relative overflow-hidden rounded-xl border border-white/10 transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4AF37]/20 hover:scale-105">
+                <Image 
+                  src={image.src} 
+                  alt={image.caption}
+                  width={400} 
+                  height={600} 
+                  className="object-cover w-full h-96 transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute bottom-0 left-0 w-full p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <p className="text-white text-base font-semibold transform-gpu translate-y-4 group-hover:translate-y-0 transition-transform duration-500">{image.caption}</p>
+                </div>
+              </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </main>
   );
 } 

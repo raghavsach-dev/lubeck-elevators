@@ -105,3 +105,20 @@ h1, h2, h3, h4, h5, h6 {
 .animate-scroll:has(.group:hover) {
   animation-play-state: paused;
 }
+
+@keyframes scroll-reverse {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-scroll-reverse {
+  animation: scroll-reverse linear infinite;
+}
+
+.animate-scroll-reverse:has(.group:hover) {
+    animation-play-state: paused;
+}

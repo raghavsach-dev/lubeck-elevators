@@ -15,7 +15,7 @@ const initialMessage: Message = {
     content: "Hello! I'm the Lubeck Assistant. How can I help you today?"
 };
 
-export default function ChatbotPopup() {
+export default function ChatbotPopup({ mobileMenuOpen }: { mobileMenuOpen?: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([initialMessage]);
   const [input, setInput] = useState('');
@@ -103,18 +103,24 @@ export default function ChatbotPopup() {
     <>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 bg-[#D4AF37] text-black px-5 py-3 rounded-full shadow-lg hover:bg-[#FFD700] transition-all duration-300 z-50 transform hover:scale-105 flex items-center gap-3"
+        className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 bg-[#D4AF37] text-black p-3 sm:px-5 sm:py-3 rounded-full shadow-lg hover:bg-[#FFD700] transition-all duration-300 z-[60] transform hover:scale-105 flex items-center gap-3 ${mobileMenuOpen ? 'hidden' : ''}`}
         aria-label="Toggle Chat"
       >
-        <span className="font-semibold">Chat With Lubeck AI</span>
-        {isOpen ? <X size={24} className="transition-transform duration-300 rotate-90" /> : <MessageSquare size={24} className="transition-transform duration-300" />}
+        <span className="hidden sm:inline font-semibold">Chat With Lubeck AI</span>
+        {isOpen ? <X size={24} className="transition-transform duration-300 sm:rotate-90" /> : <MessageSquare size={24} className="transition-transform duration-300" />}
       </button>
 
       {isOpen && (
-        <div className={`fixed bottom-24 right-6 w-full max-w-sm h-[70vh] max-h-[700px] flex flex-col z-50 transition-all duration-500 ease-in-out ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
-          <div className="w-full h-full bg-[#1C1C1C] border-2 border-[#D4AF37]/50 rounded-xl shadow-2xl flex flex-col">
-            <header className="p-4 border-b border-white/10 text-center bg-gradient-to-b from-white/5 to-transparent rounded-t-xl">
+        <div className={`fixed z-50 transition-all duration-500 ease-in-out
+          sm:bottom-24 sm:right-6 sm:w-full sm:max-w-sm sm:h-[70vh] sm:max-h-[700px]
+          inset-0 sm:inset-auto 
+          ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
+          <div className="w-full h-full bg-[#1C1C1C] border-t-2 sm:border-2 border-[#D4AF37]/50 sm:rounded-xl shadow-2xl flex flex-col">
+            <header className="p-4 border-b border-white/10 flex items-center justify-between sm:text-center sm:justify-center sm:bg-gradient-to-b from-white/5 to-transparent rounded-t-xl">
               <h3 className="font-heading text-xl text-[#D4AF37]">Lubeck Assistant</h3>
+              <button onClick={() => setIsOpen(false)} className="sm:hidden text-white hover:text-[#D4AF37]">
+                <X size={24} />
+              </button>
             </header>
 
             <div className="flex-grow p-4 overflow-y-auto chat-scrollbar">

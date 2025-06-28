@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { VideoPlayer } from './components/VideoPlayer';
 import dynamic from 'next/dynamic';
+import { motion, Variants } from 'framer-motion';
 
 const PdfViewerPopup = dynamic(() => import('./components/PdfViewerPopup'), {
     ssr: false,
@@ -64,6 +65,21 @@ export default function Home() {
     setGalleryImages(shuffleArray([...allImages]).slice(0, 3));
   }, []);
 
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.3, delayChildren: 0.2 } },
+  };
+
+  const itemVariants: Variants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.5, ease: 'easeOut' } },
+  };
+
+  const cardVariants: Variants = {
+    hidden: { y: 30, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.5, ease: 'easeOut' } },
+  };
+
   return (
     <>
       {/* Hero Section */}
@@ -79,68 +95,90 @@ export default function Home() {
           Your browser does not support the video tag.
         </video>
         <div className="absolute inset-0 bg-black/50 z-10"></div>
-        <div className="relative z-20 max-w-4xl mx-auto px-6 text-center">
-          <h1 className="font-heading text-5xl md:text-7xl font-bold mb-6">
+        <motion.div 
+          className="relative z-20 max-w-4xl mx-auto px-6 text-center"
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+        >
+          <motion.h1 variants={itemVariants} className="font-heading text-4xl sm:text-5xl md:text-7xl font-bold mb-6">
             <span className="text-white">Elevating</span> <span className="text-gradient-gold">Excellence</span>
-          </h1>
-          <p className="text-base md:text-lg text-white/80 mb-10 max-w-3xl mx-auto">
+          </motion.h1>
+          <motion.p variants={itemVariants} className="text-base md:text-lg text-white/80 mb-10 max-w-3xl mx-auto">
             Experience the pinnacle of vertical transportation. We deliver premium elevator solutions that combine cutting-edge technology with uncompromising luxury.
-          </p>
-          <div className="flex justify-center items-center gap-4">
-            <Link href="/contact" className="px-8 py-3 bg-[#D4AF37] text-black font-semibold rounded-md transition-all duration-300 hover:bg-[#FFD700] hover:shadow-[0_0_20px_rgba(255,215,0,0.5)]">
+          </motion.p>
+          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-center items-center gap-4">
+            <Link href="/contact" className="px-8 py-3 bg-[#D4AF37] text-black font-semibold rounded-md transition-all duration-300 hover:bg-[#FFD700] hover:shadow-[0_0_20px_rgba(255,215,0,0.5)] w-full sm:w-auto">
               Request a Quote
             </Link>
             <button
               onClick={() => setIsCatalogOpen(true)}
-              className="px-8 py-3 bg-transparent border border-white/50 text-white font-semibold rounded-md transition-all duration-300 hover:bg-white/10 hover:border-white"
+              className="px-8 py-3 bg-transparent border border-white/50 text-white font-semibold rounded-md transition-all duration-300 hover:bg-white/10 hover:border-white w-full sm:w-auto"
             >
               View Catalog
             </button>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-20 bg-[#0D0D0D]">
+      <motion.section 
+        id="services" 
+        className="py-20 bg-[#0D0D0D]"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={containerVariants}
+      >
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="font-heading text-4xl md:text-5xl font-bold mb-4">Our <span className="text-[#D4AF37]">Premium Services</span></h2>
+          <motion.div variants={itemVariants} className="text-center mb-12 sm:mb-16">
+            <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Our <span className="text-[#D4AF37]">Premium Services</span></h2>
             <p className="text-base md:text-lg text-white/60 max-w-3xl mx-auto">From installation to maintenance, we provide comprehensive solutions tailored to your needs with unmatched attention to detail.</p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-[#1C1C1C] border border-white/10 rounded-xl p-6 md:p-8 text-center transition-all duration-300 transform hover:-translate-y-2 hover:border-[#D4AF37] hover:shadow-[0_10px_40px_rgba(212,175,55,0.15)]">
+          </motion.div>
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            variants={containerVariants}
+          >
+            <motion.div variants={cardVariants} className="bg-[#1C1C1C] border border-white/10 rounded-xl p-6 md:p-8 text-center transition-all duration-300 transform hover:-translate-y-2 hover:border-[#D4AF37] hover:shadow-[0_10px_40px_rgba(212,175,55,0.15)]">
               <div className="w-16 h-16 bg-[#D4AF37] rounded-full flex items-center justify-center mx-auto mb-6"><svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M2 21h11.5v-1.5h-10v-15h5.62l1.38 1.38V7.5h1.5v-3.38l-1.38-1.37H2v17zM22 6.5v15H10.5v-15H22m-1.5 1.5h-9v12h9v-12zM5.5 3.5h3.13l-1 1H5.5v-1zm9 3h3v1.5h-3V6.5zm0 3h3v1.5h-3V9.5zm0 3h3v1.5h-3v-1.5z"/></svg></div>
               <h3 className="font-heading text-xl md:text-2xl font-semibold mb-3">New Installation</h3>
               <p className="text-sm md:text-base text-white/60">State-of-the-art elevator installations with premium materials and cutting-edge technology.</p>
-            </div>
-            <div className="bg-[#1C1C1C] border border-white/10 rounded-xl p-6 md:p-8 text-center transition-all duration-300 transform hover:-translate-y-2 hover:border-[#D4AF37] hover:shadow-[0_10px_40px_rgba(212,175,55,0.15)]">
+            </motion.div>
+            <motion.div variants={cardVariants} className="bg-[#1C1C1C] border border-white/10 rounded-xl p-6 md:p-8 text-center transition-all duration-300 transform hover:-translate-y-2 hover:border-[#D4AF37] hover:shadow-[0_10px_40px_rgba(212,175,55,0.15)]">
               <div className="w-16 h-16 bg-[#D4AF37] rounded-full flex items-center justify-center mx-auto mb-6"><svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg></div>
               <h3 className="font-heading text-xl md:text-2xl font-semibold mb-3">Maintenance & Repair</h3>
               <p className="text-sm md:text-base text-white/60">Comprehensive programs and expert repairs to ensure your elevators operate safely and efficiently.</p>
-            </div>
-            <div className="bg-[#1C1C1C] border border-white/10 rounded-xl p-6 md:p-8 text-center transition-all duration-300 transform hover:-translate-y-2 hover:border-[#D4AF37] hover:shadow-[0_10px_40px_rgba(212,175,55,0.15)]">
+            </motion.div>
+            <motion.div variants={cardVariants} className="bg-[#1C1C1C] border border-white/10 rounded-xl p-6 md:p-8 text-center transition-all duration-300 transform hover:-translate-y-2 hover:border-[#D4AF37] hover:shadow-[0_10px_40px_rgba(212,175,55,0.15)]">
               <div className="w-16 h-16 bg-[#D4AF37] rounded-full flex items-center justify-center mx-auto mb-6"><svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.5 15l-3.5-3.5 1.41-1.41L10.5 13.17l5.59-5.59L17.5 9l-7 7z"/></svg></div>
               <h3 className="font-heading text-xl md:text-2xl font-semibold mb-3">Modernization</h3>
               <p className="text-sm md:text-base text-white/60">Transform your existing elevators with modern technology, improved efficiency, and enhanced safety.</p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* About Us Snippet Section */}
-      <section id="about-snippet" className="py-20 bg-black">
+      <motion.section 
+        id="about-snippet" 
+        className="py-20 bg-black"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={containerVariants}
+      >
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="md:pr-8 text-center md:text-left">
-              <h2 className="font-heading text-4xl md:text-5xl font-bold mb-4">About <span className="text-[#D4AF37]">Lubeck</span></h2>
+            <motion.div variants={itemVariants} className="md:pr-8 text-center md:text-left">
+              <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold mb-4">About <span className="text-[#D4AF37]">Lubeck</span></h2>
               <p className="text-base md:text-lg text-white/80 mb-6 leading-relaxed">
                 Founded on the principles of innovation and excellence, Lubeck Elevators has been a leader in the vertical transportation industry for over two decades. We are dedicated to delivering superior quality, safety, and reliability in every project.
               </p>
               <Link href="/about" className="px-8 py-3 bg-transparent text-[#D4AF37] font-semibold rounded-lg border-2 border-[#D4AF37] transition-all duration-300 hover:bg-[#D4AF37] hover:text-black transform hover:-translate-y-1">
                 Read More
               </Link>
-            </div>
-             <div className="rounded-xl overflow-hidden shadow-2xl h-80 order-first md:order-last">
+            </motion.div>
+             <motion.div variants={itemVariants} className="rounded-xl overflow-hidden shadow-2xl h-80 order-first md:order-last">
           <Image
                 src="/lift-sample.jpg" 
                 alt="Lubeck elevator interior" 
@@ -148,62 +186,95 @@ export default function Home() {
                 height={400}
                 className="object-cover w-full h-full"
               />
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Gallery Snippet Section */}
-      <section id="gallery-snippet" className="py-20 bg-[#0D0D0D]">
+      <motion.section 
+        id="gallery-snippet" 
+        className="py-20 bg-[#0D0D0D]"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={containerVariants}
+      >
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="font-heading text-4xl md:text-5xl font-bold mb-4">Our <span className="text-[#D4AF37]">Gallery</span></h2>
+          <motion.div variants={itemVariants} className="text-center mb-12 sm:mb-16">
+            <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Our <span className="text-[#D4AF37]">Gallery</span></h2>
             <p className="text-base md:text-lg text-white/60 max-w-3xl mx-auto">Explore a selection of our finest elevator designs, where innovation meets luxury.</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          </motion.div>
+          <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" variants={containerVariants}>
             {galleryImages.map((image, index) => (
-              <div key={index} className="group relative overflow-hidden rounded-xl border border-white/10 transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4AF37]/20 hover:scale-105">
-                <Image 
-                  src={image.src} 
-                  alt={image.caption}
-                  width={400} 
-                  height={600} 
-                  className="object-cover w-full h-96 transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute bottom-0 left-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <p className="text-white text-lg font-semibold transform-gpu translate-y-4 group-hover:translate-y-0 transition-transform duration-500">{image.caption}</p>
+              <motion.div key={index} variants={cardVariants}>
+                {/* Mobile and Tablet View: Caption Below Image */}
+                <div className="sm:hidden bg-[#1C1C1C] rounded-xl border border-white/10 overflow-hidden">
+                  <Image 
+                    src={image.src} 
+                    alt={image.caption}
+                    width={400} 
+                    height={600} 
+                    className="object-cover w-full h-80"
+                  />
+                  <div className="p-4">
+                    <p className="text-white text-base font-semibold">{image.caption}</p>
+                  </div>
                 </div>
-              </div>
+
+                {/* Desktop View: Hover Effect */}
+                <div className="hidden sm:block group relative overflow-hidden rounded-xl border border-white/10 transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4AF37]/20 hover:scale-105">
+                  <Image 
+                    src={image.src} 
+                    alt={image.caption}
+                    width={400} 
+                    height={600} 
+                    className="object-cover w-full h-96 transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute bottom-0 left-0 w-full p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <p className="text-white text-lg font-semibold transform-gpu translate-y-4 group-hover:translate-y-0 transition-transform duration-500">{image.caption}</p>
+                  </div>
+                </div>
+              </motion.div>
             ))}
-          </div>
-          <div className="mt-12 text-center">
+          </motion.div>
+          <motion.div variants={itemVariants} className="mt-12 text-center">
             <Link href="/gallery" className="px-8 py-3 bg-[#D4AF37] text-black font-semibold rounded-lg transition-all duration-300 hover:bg-[#FFD700] hover:scale-105">
               See More
             </Link>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Video Showcase Section */}
-      <section id="video-showcase" className="py-20 bg-black">
+      <motion.section 
+        id="video-showcase" 
+        className="py-20 bg-black"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={containerVariants}
+      >
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="font-heading text-4xl md:text-5xl font-bold mb-4">Video <span className="text-[#D4AF37]">Showcase</span></h2>
+          <motion.div variants={itemVariants} className="text-center mb-12 sm:mb-16">
+            <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Video <span className="text-[#D4AF37]">Showcase</span></h2>
             <p className="text-base md:text-lg text-white/60 max-w-3xl mx-auto">Watch our elevators in action and see the future of vertical transportation.</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          </motion.div>
+          <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-10" variants={containerVariants}>
             {videoPreviews.map((video, index) => (
-                <VideoPlayer key={index} src={video.src} title={video.title} description={video.description} />
+                <motion.div key={index} variants={cardVariants}>
+                  <VideoPlayer src={video.src} title={video.title} description={video.description} />
+                </motion.div>
             ))}
-          </div>
-          <div className="mt-12 text-center">
+          </motion.div>
+          <motion.div variants={itemVariants} className="mt-12 text-center">
             <Link href="/videos" className="px-8 py-3 bg-[#D4AF37] text-black font-semibold rounded-lg transition-all duration-300 hover:bg-[#FFD700] hover:scale-105">
               Watch More
             </Link>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {isCatalogOpen && (
         <PdfViewerPopup 

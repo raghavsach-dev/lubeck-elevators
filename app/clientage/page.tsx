@@ -1,5 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 import ScrollingLogos from '../components/ScrollingLogos';
+import { motion, Variants } from 'framer-motion';
 
 export default function ClientagePage() {
   const clients = [
@@ -88,33 +91,73 @@ export default function ClientagePage() {
     }
   ];
 
+  // Duplicate the arrays to ensure they are wide enough for a seamless loop on all screen sizes
+  const originalClientsRow1 = clients.slice(0, 4);
+  const originalClientsRow2 = clients.slice(4);
+  const originalCollaborationsRow1 = collaborations.slice(0, 5);
+  const originalCollaborationsRow2 = collaborations.slice(5);
+
+  const clientsRow1 = [...originalClientsRow1, ...originalClientsRow1, ...originalClientsRow1];
+  const clientsRow2 = [...originalClientsRow2, ...originalClientsRow2, ...originalClientsRow2, ...originalClientsRow2];
+  const collaborationsRow1 = [...originalCollaborationsRow1, ...originalCollaborationsRow1, ...originalCollaborationsRow1];
+  const collaborationsRow2 = [...originalCollaborationsRow2, ...originalCollaborationsRow2, ...originalCollaborationsRow2];
+
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.3, delayChildren: 0.2 },
+    },
+  };
+
+  const itemVariants: Variants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.5, ease: 'easeOut' },
+    },
+  };
+
   return (
     <div className="relative min-h-screen bg-black pt-32 pb-20 text-white">
       <div className="absolute inset-0 z-0">
         <Image
           src="/liftdesign.jpg"
           alt="Lubeck Elevators background"
-          layout="fill"
-          objectFit="cover"
-          quality={100}
+          fill
+          className="object-cover"
         />
         <div className="absolute inset-0 bg-black opacity-80" />
       </div>
       <div className="relative z-10 space-y-24">
-        <div className="space-y-10">
-          <div className="text-center max-w-7xl mx-auto px-6">
-            <h1 className="font-heading text-4xl md:text-6xl font-bold text-[#D4AF37]">Our Clientage</h1>
-            <p className="text-base md:text-lg text-white/70 mt-4 max-w-3xl mx-auto">We are proud to have worked with a diverse range of prestigious clients who trust in our commitment to quality and excellence.</p>
-          </div>
-          <ScrollingLogos logos={clients} itemClassName="h-40 w-40 md:h-48 md:w-48" speed="fast" />
+        <div className="space-y-4">
+          <motion.div 
+            className="text-center max-w-7xl mx-auto px-6"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
+            <motion.h1 variants={itemVariants} className="font-heading text-3xl sm:text-4xl md:text-6xl font-bold text-[#D4AF37]">Our Clientage</motion.h1>
+            <motion.p variants={itemVariants} className="text-base md:text-lg text-white/70 mt-4 max-w-3xl mx-auto">We are proud to have worked with a diverse range of prestigious clients who trust in our commitment to quality and excellence.</motion.p>
+          </motion.div>
+          <ScrollingLogos logos={clientsRow1} itemClassName="h-40 w-40 sm:h-48 sm:w-48 md:h-56 md:w-56" speed="fast" />
+          <ScrollingLogos logos={clientsRow2} itemClassName="h-40 w-40 sm:h-48 sm:w-48 md:h-56 md:w-56" speed="fast" direction="reverse" />
         </div>
 
-        <div className="space-y-10">
-          <div className="text-center max-w-7xl mx-auto px-6">
-            <h2 className="font-heading text-4xl md:text-6xl font-bold text-[#D4AF37]">Our Collaborations</h2>
-            <p className="text-base md:text-lg text-white/70 mt-4 max-w-3xl mx-auto">We partner with leading global manufacturers to ensure our elevators are built with the highest quality components and technology.</p>
-          </div>
-          <ScrollingLogos logos={collaborations} itemClassName="h-40 w-64 md:h-48 md:w-72" speed="normal" />
+        <div className="space-y-4">
+          <motion.div 
+            className="text-center max-w-7xl mx-auto px-6"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            variants={containerVariants}
+          >
+            <motion.h2 variants={itemVariants} className="font-heading text-3xl sm:text-4xl md:text-6xl font-bold text-[#D4AF37]">Our Collaborations</motion.h2>
+            <motion.p variants={itemVariants} className="text-base md:text-lg text-white/70 mt-4 max-w-3xl mx-auto">We partner with leading global manufacturers to ensure our elevators are built with the highest quality components and technology.</motion.p>
+          </motion.div>
+          <ScrollingLogos logos={collaborationsRow1} itemClassName="h-40 w-64 sm:h-48 sm:w-72 md:h-56 md:w-80" speed="normal" />
+          <ScrollingLogos logos={collaborationsRow2} itemClassName="h-40 w-64 sm:h-48 sm:w-72 md:h-56 md:w-80" speed="normal" direction="reverse" />
         </div>
       </div>
     </div>

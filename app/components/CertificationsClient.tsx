@@ -6,6 +6,7 @@ import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
 import { Eye, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
+import { motion, Variants } from 'framer-motion';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   'pdfjs-dist/build/pdf.worker.min.mjs',
@@ -69,10 +70,10 @@ const PDFViewerModal = ({ file, onClose, name }: PDFViewerModalProps) => {
             <X size={24} />
           </button>
         </header>
-        <div className="flex-grow overflow-y-auto p-4 bg-black/30">
+        <div className="flex-grow overflow-y-auto p-2 sm:p-4 bg-black/30">
             <Document file={file} onLoadSuccess={onDocumentLoadSuccess} loading={<LoadingSpinner />}>
                 <div className="flex justify-center">
-                    <Page pageNumber={pageNumber} width={800} renderTextLayer={false} renderAnnotationLayer={false}/>
+                    <Page pageNumber={pageNumber} width={window.innerWidth > 768 ? 800 : undefined} className="max-w-full" renderTextLayer={false} renderAnnotationLayer={false}/>
                 </div>
             </Document>
         </div>
@@ -94,8 +95,21 @@ const PDFViewerModal = ({ file, onClose, name }: PDFViewerModalProps) => {
   );
 };
 
-export default function CertificationsClient() {
-  const [selectedPdf, setSelectedPdf] = useState<{ name: string; file: string; } | null>(null);
+const CertificationsClient = () => {
+  const [selectedPdf, setSelectedPdf] = useState<string | null>(null);
+
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2, delayChildren: 0.2 },
+    },
+  };
+
+  const itemVariants: Variants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.5, ease: 'easeOut' } },
+  };
 
   useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
@@ -110,37 +124,59 @@ export default function CertificationsClient() {
     };
   }, []);
 
+  const gridVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 },
+    },
+  };
+
   return (
     <>
       <div className="relative bg-black text-white min-h-screen pt-32 pb-20">
         <div className="absolute inset-0 z-0">
-            <Image
+          <Image
             src="/liftdesign.jpg"
             alt="Lubeck Elevators background"
-            layout="fill"
-            objectFit="cover"
-            quality={100}
-            />
-            <div className="absolute inset-0 bg-black opacity-80" />
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-black opacity-80" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h1 className="font-heading text-4xl md:text-6xl font-bold text-[#D4AF37]">Our Certifications</h1>
-            <p className="text-base md:text-lg text-white/70 mt-4 max-w-3xl mx-auto">
+          <motion.div 
+            className="text-center mb-16"
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
+            <motion.h1 variants={itemVariants} className="font-heading text-3xl sm:text-4xl md:text-6xl font-bold text-[#D4AF37]">Our Certifications</motion.h1>
+            <motion.p variants={itemVariants} className="text-base md:text-lg text-white/70 mt-4 max-w-3xl mx-auto">
               We adhere to the highest standards of quality, safety, and environmental management.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
-          <div className="flex flex-wrap justify-center gap-10">
+          <motion.div 
+            className="flex flex-wrap justify-center gap-10"
+            variants={gridVariants}
+            initial="hidden"
+            animate="visible"
+          >
             {certifications.map((cert, index) => (
-              <div key={index} onClick={() => setSelectedPdf(cert)} className="group cursor-pointer relative w-full sm:w-80">
-                <div className="bg-[#1C1C1C] border border-white/10 rounded-xl p-6 text-center transition-all duration-300 transform hover:-translate-y-2 hover:border-[#D4AF37] hover:shadow-2xl hover:shadow-[#D4AF37]/20 overflow-hidden">
+              <motion.div 
+                key={index} 
+                onClick={() => setSelectedPdf(cert.file)} 
+                className="group cursor-pointer relative w-full sm:w-80"
+                variants={itemVariants}
+              >
+                <div className="bg-[#1C1C1C] border border-white/10 rounded-xl p-4 sm:p-6 text-center transition-all duration-300 transform hover:-translate-y-2 hover:border-[#D4AF37] hover:shadow-2xl hover:shadow-[#D4AF37]/20 overflow-hidden">
                   <div className="h-80 mb-4 flex items-center justify-center overflow-hidden rounded-md bg-black/20">
                     <Document file={cert.file} loading={<LoadingSpinner />} className="transition-transform duration-500 group-hover:scale-105">
-                       <Page pageNumber={1} width={220} renderTextLayer={false} renderAnnotationLayer={false} />
+                       <Page pageNumber={1} width={window.innerWidth > 640 ? 220 : 180} renderTextLayer={false} renderAnnotationLayer={false} />
                     </Document>
                   </div>
-                  <h3 className="font-heading text-lg md:text-xl font-semibold text-white/90 transition-colors duration-300 h-12 flex items-center justify-center">{cert.name}</h3>
+                  <h3 className="font-heading text-base sm:text-lg md:text-xl font-semibold text-white/90 transition-colors duration-300 h-12 flex items-center justify-center">{cert.name}</h3>
                 </div>
                 <div className="absolute inset-0 bg-black/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-xl">
                     <div className="flex flex-col items-center text-white">
@@ -148,18 +184,26 @@ export default function CertificationsClient() {
                         <span className="font-semibold text-lg">View Certificate</span>
                     </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
-          <div className="text-center mt-20 max-w-3xl mx-auto">
-            <p className="text-xl md:text-2xl font-heading text-white/70 italic">
+          <motion.div 
+            className="text-center mt-20 max-w-3xl mx-auto"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.8 }}
+            variants={itemVariants}
+          >
+            <p className="text-lg sm:text-xl md:text-2xl font-heading text-white/70 italic">
               &quot;Certified excellence, engineered for your peace of mind.&quot;
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
-      {selectedPdf && <PDFViewerModal file={selectedPdf.file} name={selectedPdf.name} onClose={() => setSelectedPdf(null)} />}
+      {selectedPdf && <PDFViewerModal file={selectedPdf} name={certifications.find(c => c.file === selectedPdf)?.name || 'Certificate'} onClose={() => setSelectedPdf(null)} />}
     </>
   );
-} 
+}
+
+export default CertificationsClient; 

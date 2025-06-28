@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { motion, Variants } from 'framer-motion';
 
 export default function ContactPage() {
   const branchOffices = [
@@ -15,28 +16,65 @@ export default function ContactPage() {
 
   const [isMapLoading, setMapLoading] = useState(true);
 
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: { staggerChildren: 0.2, delayChildren: 0.2 }
+    }
+  };
+
+  const itemVariants: Variants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+        y: 0,
+        opacity: 1,
+        transition: { duration: 0.5, ease: 'easeOut' }
+    }
+  };
+
+  const formVariants: Variants = {
+    hidden: { x: -30, opacity: 0 },
+    visible: { x: 0, opacity: 1, transition: { duration: 0.6, ease: 'easeOut' } },
+  };
+
+  const detailsVariants: Variants = {
+    hidden: { x: 30, opacity: 0 },
+    visible: { x: 0, opacity: 1, transition: { duration: 0.6, ease: 'easeOut' } },
+  };
+
   return (
     <div className="relative bg-black text-white min-h-screen pt-32 pb-20">
         <div className="absolute inset-0 z-0">
             <Image
                 src="/liftdesign.jpg"
                 alt="Lubeck Elevators background"
-                layout="fill"
-                objectFit="cover"
-                quality={100}
+                fill
+                className="object-cover"
             />
-            <div className="absolute inset-0 bg-black opacity-80" />
+            <div className="absolute inset-0 bg-black/70" />
         </div>
       <div className="relative z-10 max-w-7xl mx-auto px-6">
-        <div className="text-center">
-          <h1 className="font-heading text-4xl md:text-6xl font-bold text-[#D4AF37]">Contact Us</h1>
-          <p className="text-base md:text-lg text-white/70 mt-4 max-w-3xl mx-auto">Get in touch with us for a free consultation.</p>
-        </div>
+        <motion.div 
+          className="text-center"
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+        >
+          <motion.h1 variants={itemVariants} className="font-heading text-3xl sm:text-4xl md:text-6xl font-bold text-[#D4AF37]">Contact Us</motion.h1>
+          <motion.p variants={itemVariants} className="text-base md:text-lg text-white/70 mt-4 max-w-3xl mx-auto">Get in touch with us for a free consultation.</motion.p>
+        </motion.div>
 
-        <div className="mt-16 grid md:grid-cols-2 gap-12">
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <div className="bg-[#1C1C1C] p-6 md:p-8 rounded-lg border border-white/10">
-            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-6">Send us a Message</h2>
+          <motion.div 
+            className="bg-[#1C1C1C] p-6 md:p-8 rounded-lg border border-white/10"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={formVariants}
+          >
+            <h2 className="font-heading text-2xl sm:text-3xl font-bold mb-6">Send us a Message</h2>
             <form action="#" method="POST" className="space-y-6">
               <div>
                 <label htmlFor="name" className="sr-only">Name</label>
@@ -56,23 +94,29 @@ export default function ContactPage() {
               </div>
               <button type="submit" className="w-full px-8 py-3 bg-[#D4AF37] text-black font-semibold rounded-lg transition-all duration-300 hover:bg-[#FFD700]">Send Message</button>
             </form>
-          </div>
+          </motion.div>
 
           {/* Contact Details */}
-          <div className="space-y-8">
+          <motion.div 
+            className="space-y-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={detailsVariants}
+          >
             <div>
-              <h3 className="font-heading text-xl md:text-2xl font-bold text-[#D4AF37] mb-3">Head Office</h3>
+              <h3 className="font-heading text-xl sm:text-2xl font-bold text-[#D4AF37] mb-3">Head Office</h3>
               <p className="text-sm md:text-base text-white/80">A 264, SURJAMLA VIHAR , DELHI 110092</p>
               <p className="text-sm md:text-base text-white/80 mt-1">Email: LUBECKELEVATOR@GMAIL.COM</p>
               <p className="text-sm md:text-base text-white/80 mt-1">Phone: +91-9811013981, +91-9310465077</p>
             </div>
             <div>
-              <h3 className="font-heading text-xl md:text-2xl font-bold text-[#D4AF37] mb-3">Branch Offices</h3>
+              <h3 className="font-heading text-xl sm:text-2xl font-bold text-[#D4AF37] mb-3">Branch Offices</h3>
               <ul className="space-y-1 text-sm md:text-base text-white/80 list-disc list-inside">
                 {branchOffices.map(office => <li key={office}>{office}</li>)}
               </ul>
             </div>
-            <div className="relative h-64 w-full rounded-lg overflow-hidden bg-[#1C1C1C]">
+            <div className="relative h-80 md:h-64 w-full rounded-lg overflow-hidden bg-[#1C1C1C]">
               {isMapLoading && (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-[#D4AF37]"></div>
@@ -88,7 +132,7 @@ export default function ContactPage() {
                 onLoad={() => setMapLoading(false)}
               ></iframe>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

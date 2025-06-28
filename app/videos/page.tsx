@@ -2,6 +2,7 @@
 
 import { VideoPlayer } from '../components/VideoPlayer';
 import Image from 'next/image';
+import { motion, Variants } from 'framer-motion';
 
 const videos = [
   {
@@ -37,31 +38,67 @@ const videos = [
 ];
 
 export default function VideosPage() {
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.3, delayChildren: 0.2 },
+    },
+  };
+
+  const itemVariants: Variants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.5, ease: 'easeOut' },
+    },
+  };
+  
+  const gridVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2 },
+    },
+  };
+
   return (
     <div className="relative min-h-screen bg-black pt-32 pb-20">
       <div className="absolute inset-0 z-0">
         <Image
           src="/liftdesign.jpg"
           alt="Lubeck Elevators background"
-          layout="fill"
-          objectFit="cover"
-          quality={100}
+          fill
+          className="object-cover"
         />
         <div className="absolute inset-0 bg-black opacity-80" />
       </div>
       <div className="relative z-10 max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <h1 className="font-heading text-4xl md:text-6xl font-bold text-[#D4AF37]">Video Gallery</h1>
-          <p className="text-base md:text-lg text-white/70 mt-4 max-w-3xl mx-auto">
+        <motion.div 
+          className="text-center mb-16"
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+        >
+          <motion.h1 variants={itemVariants} className="font-heading text-3xl sm:text-4xl md:text-6xl font-bold text-[#D4AF37]">Video Gallery</motion.h1>
+          <motion.p variants={itemVariants} className="text-base md:text-lg text-white/70 mt-4 max-w-3xl mx-auto">
             Witness the art of elevation. Our videos showcase the seamless performance, exquisite design, and superior engineering of Lubeck Elevators in action.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12"
+          initial="hidden"
+          animate="visible"
+          variants={gridVariants}
+        >
             {videos.map((video, index) => (
-                <VideoPlayer key={index} src={video.src} title={video.title} description={video.description} />
+              <motion.div key={index} variants={itemVariants}>
+                <VideoPlayer src={video.src} title={video.title} description={video.description} />
+              </motion.div>
             ))}
-        </div>
+        </motion.div>
       </div>
     </div>
   );

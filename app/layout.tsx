@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import ChatbotPopup from "./components/ChatbotPopup";
 import "./globals.css";
 
@@ -14,6 +15,7 @@ export default function RootLayout({
   const [isScrolled, setIsScrolled] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,12 +48,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={mobileMenuOpen ? 'overflow-hidden' : ''}>
         <nav className={`fixed top-0 w-full z-50 transition-colors duration-500 ${isScrolled || mobileMenuOpen ? 'bg-black border-b border-white/10' : 'bg-transparent'}`}>
-          <div className="max-w-7xl mx-auto px-6 py-3">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
             <div className="flex items-center justify-between">
-              <Link href="/" className="flex items-center space-x-4">
+              <Link href="/" className="flex items-center space-x-2 sm:space-x-4">
                 <Image src="/logo-og.jpeg" alt="Lubeck Elevators Logo" width={50} height={50} className="rounded-lg" />
                 <div>
-                  <div className="font-heading text-xl font-bold text-[#D4AF37]">Lubeck Elevators</div>
+                  <div className="font-heading text-lg sm:text-xl font-bold text-[#D4AF37]">Lubeck Elevators</div>
                   <div className="text-xs text-white/70">Lifting With Luxury</div>
                 </div>
               </Link>
@@ -59,13 +61,17 @@ export default function RootLayout({
               <div className="hidden md:flex items-center space-x-6">
                 <Link href="/" className="hover:text-[#D4AF37] transition-colors duration-300">Home</Link>
                 <Link href="/about" className="hover:text-[#D4AF37] transition-colors duration-300">About Us</Link>
-                 <div className="relative" onMouseEnter={() => setProductsOpen(true)} onMouseLeave={() => setProductsOpen(false)}>
-                  <Link href="/products/passenger" className="hover:text-[#D4AF37] transition-colors duration-300 flex items-center">
+                 <div 
+                    className="relative" 
+                    onMouseEnter={() => setProductsOpen(true)} 
+                    onMouseLeave={() => setTimeout(() => setProductsOpen(false), 200)}
+                 >
+                  <Link href="/products/passenger" className="hover:text-[#D4AF37] transition-colors duration-300 flex items-center py-4">
                     Products
                     <svg className={`w-4 h-4 ml-1 transition-transform duration-300 ${productsOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                   </Link>
                   {productsOpen && (
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-black border border-white/10 rounded-lg shadow-lg">
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 w-48 bg-black border border-white/10 rounded-lg shadow-lg">
                       {productLinks.map(p => (
                         <Link key={p.href} href={p.href} className="block px-4 py-2 text-sm text-white/80 hover:bg-white/5 hover:text-white">{p.name}</Link>
                       ))}
@@ -80,7 +86,7 @@ export default function RootLayout({
               </div>
               {/* Mobile Menu Button */}
               <div className="md:hidden">
-                <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+                <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="relative z-50">
                   <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={mobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}></path></svg>
                 </button>
               </div>
@@ -89,21 +95,72 @@ export default function RootLayout({
         </nav>
 
         {/* Mobile Menu */}
-        <div className={`fixed inset-0 bg-black z-40 pt-24 transition-transform duration-500 ease-in-out md:hidden ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-          <div className="flex flex-col items-center justify-center h-full space-y-6 text-2xl font-heading">
-            {allLinks.map(link => (
-              <Link key={link.href} href={link.href} onClick={() => setMobileMenuOpen(false)} className="hover:text-[#D4AF37] transition-colors duration-300">{link.name}</Link>
-            ))}
-            <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="mt-4 px-8 py-3 bg-[#D4AF37] text-black font-semibold rounded-md">Contact Us</Link>
-          </div>
-        </div>
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div 
+              className="fixed inset-0 bg-black/90 backdrop-blur-sm z-40 md:hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <motion.div 
+                className="p-8 pt-28 flex flex-col h-full"
+                initial={{ x: "-100%" }}
+                animate={{ x: 0, transition: { type: 'spring', stiffness: 300, damping: 30 } }}
+                exit={{ x: "-100%", transition: { duration: 0.3 } }}
+              >
+                <div className="space-y-6">
+                  {allLinks.map((link, i) => (
+                    <motion.div
+                      key={link.name}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0, transition: { delay: 0.1 * i + 0.2 } }}
+                    >
+                      {link.subLinks ? (
+                        <div>
+                          <button onClick={() => setMobileProductsOpen(!mobileProductsOpen)} className="w-full text-left text-3xl font-heading text-white/80 hover:text-white transition-colors flex justify-between items-center">
+                            <span>{link.name}</span>
+                            <svg className={`w-6 h-6 transition-transform duration-300 ${mobileProductsOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                          </button>
+                          <AnimatePresence>
+                          {mobileProductsOpen && (
+                            <motion.div 
+                              className="pl-4 mt-2 space-y-2"
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: 'auto' }}
+                              exit={{ opacity: 0, height: 0 }}
+                            >
+                              {link.subLinks.map(subLink => (
+                                <Link key={subLink.href} href={subLink.href} onClick={() => setMobileMenuOpen(false)} className="block text-xl font-heading text-white/60 hover:text-white transition-colors">{subLink.name}</Link>
+                              ))}
+                            </motion.div>
+                          )}
+                          </AnimatePresence>
+                        </div>
+                      ) : (
+                        <Link href={link.href} onClick={() => setMobileMenuOpen(false)} className="text-3xl font-heading text-white/80 hover:text-white transition-colors">{link.name}</Link>
+                      )}
+                    </motion.div>
+                  ))}
+                </div>
+                <motion.div 
+                  className="mt-auto"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0, transition: { delay: 0.1 * allLinks.length + 0.2 } }}
+                >
+                  <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="block w-full text-center px-8 py-4 bg-[#D4AF37] text-black font-semibold rounded-lg">Contact Us</Link>
+                </motion.div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
         
         <main>{children}</main>
 
-        <ChatbotPopup />
+        <ChatbotPopup mobileMenuOpen={mobileMenuOpen} />
         
         <footer className="bg-black border-t border-white/10 py-8">
-          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-white/60">
+          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-white/60">
             <div>
               <h3 className="font-heading text-lg text-white mb-3">Lubeck Elevators</h3>
               <p className="text-sm">Lifting With Luxury since 2009. We design, build, and install award-worthy elevators for your needs.</p>
