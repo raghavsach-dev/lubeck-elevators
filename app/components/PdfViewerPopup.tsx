@@ -1,18 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import { X } from 'lucide-react';
 
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
 
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
-  import.meta.url,
-).toString();
+pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.mjs`;
 
-const LoadingSpinner = () => (
+export const LoadingSpinner = () => (
     <div className="flex justify-center items-center h-full">
       <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-[#D4AF37]"></div>
     </div>
@@ -20,11 +17,27 @@ const LoadingSpinner = () => (
 
 interface PdfViewerPopupProps {
   file: string;
+  name: string;
   onClose: () => void;
 }
 
-export default function PdfViewerPopup({ file, onClose }: PdfViewerPopupProps) {
+export default function PdfViewerPopup({ file, name, onClose }: PdfViewerPopupProps) {
   const [numPages, setNumPages] = useState<number | null>(null);
+  const [pageWidth, setPageWidth] = useState<number | null>(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      // Set width to be 90% of window width, or a max of 800px
+      const newWidth = Math.min(window.innerWidth * 0.9, 800);
+      setPageWidth(newWidth);
+    };
+
+    handleResize(); // Set initial width
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
     setNumPages(numPages);
@@ -38,7 +51,8 @@ export default function PdfViewerPopup({ file, onClose }: PdfViewerPopupProps) {
       >
         <X size={24} />
       </button>
-      <div className="w-full h-full p-4 md:p-16 overflow-auto">
+      <div className="w-full h-full p-2 md:p-8 overflow-auto">
+        <h3 className="text-xl md:text-2xl font-bold text-center text-[#D4AF37] mb-4">{name}</h3>
         <Document
           file={file}
           onLoadSuccess={onDocumentLoadSuccess}
@@ -50,6 +64,7 @@ export default function PdfViewerPopup({ file, onClose }: PdfViewerPopupProps) {
                 <Page
                     pageNumber={index + 1}
                     className="shadow-2xl"
+                    width={pageWidth ?? undefined}
                 />
             </div>
           ))}

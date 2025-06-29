@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
-import MainLayout from './components/MainLayout';
+import { Inter } from 'next/font/google';
 import "./globals.css";
+import MainLayout from './components/MainLayout';
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: {
-    default: 'Lubeck Elevators - Lifting With Luxury',
-    template: '%s | Lubeck Elevators',
-  },
-  description: 'Lubeck Elevators offers premium and luxurious elevator solutions. We design, build, and install award-worthy elevators for residential and commercial needs.',
+  title: "Lubeck Elevators",
+  description: "Lifting with Luxury",
   icons: {
     icon: '/logo-og.jpeg',
   },
@@ -19,8 +19,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" suppressHydrationWarning={true}>
+      <body className={inter.className} suppressHydrationWarning={true}>
         <MainLayout>{children}</MainLayout>
       </body>
     </html>

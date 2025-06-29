@@ -1,11 +1,13 @@
-import type { Metadata } from 'next';
 import CertificationsPageLoader from '@/app/components/CertificationsPageLoader';
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Certifications | Lubeck Elevators',
-  description: 'View our certifications that reflect our commitment to quality, safety, and environmental standards, including ISO and LEED.',
+  title: 'Certifications',
+  description: 'Explore the certifications of Lubeck Elevators, showcasing our commitment to quality, safety, and environmental standards.',
 };
 
-export default function CertificationsPage() {
-    return <CertificationsPageLoader />;
-} 
+const CertificationsPage = () => {
+  return <CertificationsPageLoader />;
+};
+
+export default CertificationsPage; 

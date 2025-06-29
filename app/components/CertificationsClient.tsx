@@ -4,11 +4,12 @@ import { useState, useEffect } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
-import { Eye, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Eye } from 'lucide-react';
 import Image from 'next/image';
 import { motion, Variants } from 'framer-motion';
+import PdfViewerPopup, { LoadingSpinner } from './PdfViewerPopup';
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.mjs`;
 
 const certifications = [
   { name: 'USGB LEED Gold', file: '/Certifications/Lubeck-usgb-leed-gold.pdf' },
@@ -18,82 +19,9 @@ const certifications = [
   { name: 'QMS, EMS & OHSMS India Certificate', file: '/Certifications/Lubeck-india-certificate-qms-ems-ohsms.pdf' }
 ];
 
-const LoadingSpinner = () => (
-  <div className="flex items-center justify-center h-full bg-[#1C1C1C] rounded-lg">
-    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#D4AF37]"></div>
-  </div>
-);
-
-interface PDFViewerModalProps {
-  file: string;
-  name: string;
-  onClose: () => void;
-}
-
-const PDFViewerModal = ({ file, onClose, name }: PDFViewerModalProps) => {
-  const [numPages, setNumPages] = useState<number | null>(null);
-  const [pageNumber, setPageNumber] = useState(1);
-  const [isClosing, setIsClosing] = useState(false);
-
-  useEffect(() => {
-    if (isClosing) {
-      const timer = setTimeout(() => onClose(), 300);
-      return () => clearTimeout(timer);
-    }
-  }, [isClosing, onClose]);
-
-  const handleClose = () => {
-    setIsClosing(true);
-  };
-
-  function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
-    setNumPages(numPages);
-    setPageNumber(1);
-  }
-
-  const goToPrevPage = () => setPageNumber(pageNumber - 1 > 0 ? pageNumber - 1 : 1);
-  const goToNextPage = () => {
-    if (numPages) {
-      setPageNumber(pageNumber + 1 <= numPages ? pageNumber + 1 : numPages);
-    }
-  };
-
-  return (
-    <div className={`fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 transition-opacity duration-300 ${isClosing ? 'opacity-0' : 'opacity-100'}`} onClick={handleClose}>
-      <div className={`bg-[#1C1C1C] border-2 border-[#D4AF37]/50 rounded-xl shadow-2xl shadow-black/50 max-w-4xl w-full max-h-[90vh] flex flex-col transition-transform duration-300 ${isClosing ? 'scale-95' : 'scale-100'}`} onClick={(e) => e.stopPropagation()}>
-        <header className="flex items-center justify-between p-4 border-b border-white/10">
-          <h3 className="font-heading text-xl text-[#D4AF37]">{name}</h3>
-          <button onClick={handleClose} className="text-white hover:text-[#D4AF37] transition-colors">
-            <X size={24} />
-          </button>
-        </header>
-        <div className="flex-grow overflow-y-auto p-2 sm:p-4 bg-black/30">
-            <Document file={file} onLoadSuccess={onDocumentLoadSuccess} loading={<LoadingSpinner />}>
-                <div className="flex justify-center">
-                    <Page pageNumber={pageNumber} width={window.innerWidth > 768 ? 800 : undefined} className="max-w-full" renderTextLayer={false} renderAnnotationLayer={false}/>
-                </div>
-            </Document>
-        </div>
-        {numPages && numPages > 1 && (
-            <footer className="flex items-center justify-center p-2 border-t border-white/10 bg-[#111111]">
-                <button onClick={goToPrevPage} disabled={pageNumber <= 1} className="p-2 rounded-full disabled:opacity-50 disabled:cursor-not-allowed text-white hover:bg-white/10 transition-colors">
-                    <ChevronLeft size={24} />
-                </button>
-                <p className="mx-4 text-lg text-white/80">
-                    Page {pageNumber} of {numPages}
-                </p>
-                <button onClick={goToNextPage} disabled={pageNumber >= numPages} className="p-2 rounded-full disabled:opacity-50 disabled:cursor-not-allowed text-white hover:bg-white/10 transition-colors">
-                    <ChevronRight size={24} />
-                </button>
-            </footer>
-        )}
-      </div>
-    </div>
-  );
-};
-
 const CertificationsClient = () => {
   const [selectedPdf, setSelectedPdf] = useState<string | null>(null);
+  const [pageWidth, setPageWidth] = useState(220);
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -109,6 +37,13 @@ const CertificationsClient = () => {
   };
 
   useEffect(() => {
+    const handleResize = () => {
+      setPageWidth(window.innerWidth > 640 ? 220 : 180);
+    };
+
+    handleResize(); // Set initial width
+    window.addEventListener('resize', handleResize);
+
     const handleEsc = (event: KeyboardEvent) => {
        if (event.key === 'Escape') {
         setSelectedPdf(null);
@@ -117,6 +52,7 @@ const CertificationsClient = () => {
     window.addEventListener('keydown', handleEsc);
 
     return () => {
+      window.removeEventListener('resize', handleResize);
       window.removeEventListener('keydown', handleEsc);
     };
   }, []);
@@ -170,7 +106,7 @@ const CertificationsClient = () => {
                 <div className="bg-[#1C1C1C] border border-white/10 rounded-xl p-4 sm:p-6 text-center transition-all duration-300 transform hover:-translate-y-2 hover:border-[#D4AF37] hover:shadow-2xl hover:shadow-[#D4AF37]/20 overflow-hidden">
                   <div className="h-80 mb-4 flex items-center justify-center overflow-hidden rounded-md bg-black/20">
                     <Document file={cert.file} loading={<LoadingSpinner />} className="transition-transform duration-500 group-hover:scale-105">
-                       <Page pageNumber={1} width={window.innerWidth > 640 ? 220 : 180} renderTextLayer={false} renderAnnotationLayer={false} />
+                       <Page pageNumber={1} width={pageWidth} renderTextLayer={false} renderAnnotationLayer={false} />
                     </Document>
                   </div>
                   <h3 className="font-heading text-base sm:text-lg md:text-xl font-semibold text-white/90 transition-colors duration-300 h-12 flex items-center justify-center">{cert.name}</h3>
@@ -198,7 +134,7 @@ const CertificationsClient = () => {
           </motion.div>
         </div>
       </div>
-      {selectedPdf && <PDFViewerModal file={selectedPdf} name={certifications.find(c => c.file === selectedPdf)?.name || 'Certificate'} onClose={() => setSelectedPdf(null)} />}
+      {selectedPdf && <PdfViewerPopup file={selectedPdf} name={certifications.find(c => c.file === selectedPdf)?.name || 'Certificate'} onClose={() => setSelectedPdf(null)} />}
     </>
   );
 }

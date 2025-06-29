@@ -5,6 +5,15 @@ import Image from 'next/image';
 import { motion, Variants } from 'framer-motion';
 
 export default function ContactPageClient() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionStatus, setSubmissionStatus] = useState<'success' | 'error' | null>(null);
+
   const branchOffices = [
     "NOIDA SEC 135",
     "HALDWANI",
@@ -15,6 +24,39 @@ export default function ContactPageClient() {
   ];
 
   const [isMapLoading, setMapLoading] = useState(true);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmissionStatus(null);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmissionStatus('success');
+        setFormData({ name: '', email: '', phone: '', message: '' });
+      } else {
+        throw new Error('Failed to submit');
+      }
+    } catch (error) {
+      console.error(error);
+      setSubmissionStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -75,24 +117,60 @@ export default function ContactPageClient() {
             variants={formVariants}
           >
             <h2 className="font-heading text-2xl sm:text-3xl font-bold mb-6">Send us a Message</h2>
-            <form action="#" method="POST" className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="sr-only">Name</label>
-                <input type="text" name="name" id="name" placeholder="Your Name" className="w-full bg-black/50 border border-white/20 rounded-md p-3 focus:ring-[#D4AF37] focus:border-[#D4AF37]" />
+                <input type="text" name="name" id="name" placeholder="Your Name" required value={formData.name} onChange={handleInputChange} className="w-full bg-black/50 border border-white/20 rounded-md p-3 focus:ring-[#D4AF37] focus:border-[#D4AF37]" />
               </div>
               <div>
                 <label htmlFor="email" className="sr-only">Email</label>
-                <input type="email" name="email" id="email" placeholder="Your Email" className="w-full bg-black/50 border border-white/20 rounded-md p-3 focus:ring-[#D4AF37] focus:border-[#D4AF37]" />
+                <input type="email" name="email" id="email" placeholder="Your Email" required value={formData.email} onChange={handleInputChange} className="w-full bg-black/50 border border-white/20 rounded-md p-3 focus:ring-[#D4AF37] focus:border-[#D4AF37]" />
               </div>
               <div>
                 <label htmlFor="phone" className="sr-only">Phone Number</label>
-                <input type="tel" name="phone" id="phone" placeholder="Your Phone Number" className="w-full bg-black/50 border border-white/20 rounded-md p-3 focus:ring-[#D4AF37] focus:border-[#D4AF37]" />
+                <div className="relative flex items-center">
+                  <span className="absolute left-3 text-white/50 pointer-events-none">+91</span>
+                  <input 
+                    type="tel" 
+                    name="phone" 
+                    id="phone" 
+                    placeholder="Your Phone Number" 
+                    required 
+                    value={formData.phone} 
+                    onChange={handleInputChange} 
+                    className="w-full bg-black/50 border border-white/20 rounded-md p-3 pl-12 focus:ring-[#D4AF37] focus:border-[#D4AF37]" 
+                  />
+                </div>
               </div>
               <div>
                 <label htmlFor="message" className="sr-only">Message</label>
-                <textarea name="message" id="message" rows={4} placeholder="Your Message" className="w-full bg-black/50 border border-white/20 rounded-md p-3 focus:ring-[#D4AF37] focus:border-[#D4AF37]"></textarea>
+                <textarea name="message" id="message" rows={4} placeholder="Your Message" required value={formData.message} onChange={handleInputChange} className="w-full bg-black/50 border border-white/20 rounded-md p-3 focus:ring-[#D4AF37] focus:border-[#D4AF37]"></textarea>
               </div>
-              <button type="submit" className="w-full px-8 py-3 bg-[#D4AF37] text-black font-semibold rounded-lg transition-all duration-300 hover:bg-[#FFD700]">Send Message</button>
+              <div>
+                <button 
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-[#D4AF37] text-black font-semibold rounded-md p-3 transition-all duration-300 hover:bg-[#FFD700] disabled:bg-gray-500 disabled:cursor-not-allowed flex items-center justify-center"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Submitting...
+                    </>
+                  ) : (
+                    'Send Message'
+                  )}
+                </button>
+              </div>
+              {submissionStatus === 'success' && (
+                <p className="text-green-500 text-center">Message sent successfully! We will get back to you soon.</p>
+              )}
+              {submissionStatus === 'error' && (
+                <p className="text-red-500 text-center">Something went wrong. Please try again later.</p>
+              )}
             </form>
           </motion.div>
 

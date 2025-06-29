@@ -278,9 +278,10 @@ export default function HomePageClient() {
       </motion.section>
 
       {isCatalogOpen && (
-        <PdfViewerPopup 
-          file="/Main_Catalogue.pdf" 
-          onClose={() => setIsCatalogOpen(false)} 
+        <PdfViewerPopup
+          file="/Main_Catalogue.pdf"
+          name="Main Catalog"
+          onClose={() => setIsCatalogOpen(false)}
         />
       )}
     </>

@@ -181,7 +181,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
               <div className="flex space-x-4">
                 <a href="https://www.instagram.com/lubeckelevatorsdelhincr/#" target="_blank" rel="noopener noreferrer" className="hover:text-white">Instagram</a>
                 <a href="https://www.facebook.com/LUBECKELEVATORS" target="_blank" rel="noopener noreferrer" className="hover:text-white">Facebook</a>
-                <a href="#" className="hover:text-white">YouTube</a>
+                <a href="https://www.youtube.com/@LUBECKELEVATORS" target="_blank" rel="noopener noreferrer" className="hover:text-white">YouTube</a>
               </div>
             </div>
           </div>
