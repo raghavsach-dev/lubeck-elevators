@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Airtable from 'airtable';
 
+export const runtime = 'edge';
+
 export async function POST(req: NextRequest) {
   const { name, email, phone, message } = await req.json();
 
