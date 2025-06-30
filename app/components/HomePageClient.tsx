@@ -264,8 +264,12 @@ export default function HomePageClient() {
           </motion.div>
           <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-10" variants={containerVariants}>
             {videoPreviews.map((video, index) => (
-                <motion.div key={index} variants={cardVariants}>
-                  <VideoPlayer src={video.src} title={video.title} description={video.description} />
+                <motion.div key={index} variants={cardVariants} className="bg-[#1C1C1C] border border-white/10 rounded-xl overflow-hidden group transition-all duration-300 transform hover:-translate-y-2 hover:border-[#D4AF37] hover:shadow-2xl hover:shadow-[#D4AF37]/20">
+                  <VideoPlayer src={video.src} title={video.title} />
+                  <div className="p-6">
+                    <h3 className="font-heading text-xl font-semibold text-[#D4AF37] mb-2">{video.title}</h3>
+                    <p className="text-white/70">{video.description}</p>
+                  </div>
                 </motion.div>
             ))}
           </motion.div>
