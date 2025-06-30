@@ -8,32 +8,38 @@ const videos = [
   {
     src: '/Videos/NANITAL 2 LIFT HANDOVER.mp4',
     title: 'Nainital Project Handover',
-    description: 'A showcase of the seamless integration and final handover of our dual-lift installation in a prestigious Nainital property.'
+    description: 'A showcase of the seamless integration and final handover of our dual-lift installation in a prestigious Nainital property.',
+    isYoutube: false,
   },
   {
-    src: '/Videos/SHREE KRISHNA DESIGNER CABIN.mp4',
+    src: 'https://www.youtube.com/embed/mfV0UB0U7DA',
     title: 'Shree Krishna Designer Cabin',
-    description: 'An inside look at the exquisite craftsmanship of the custom Shree Krishna designer cabin, featuring intricate details.'
+    description: 'An inside look at the exquisite craftsmanship of the custom Shree Krishna designer cabin, featuring intricate details.',
+    isYoutube: true,
   },
   {
-    src: '/Videos/GOLDEN DESIGNER 2200MM.mp4',
+    src: 'https://www.youtube.com/embed/tg6sknhbQC4',
     title: 'Golden Designer 2200mm Cabin',
-    description: 'Experience the grandeur of our 2200mm Golden Designer cabin, built for spaciousness and ultimate luxury.'
+    description: 'Experience the grandeur of our 2200mm Golden Designer cabin, built for spaciousness and ultimate luxury.',
+    isYoutube: true,
   },
   {
-    src: '/Videos/PRESIDENTIAL ROSE GOLD DESIGN.mp4',
+    src: 'https://www.youtube.com/embed/uuFONTS2xEM',
     title: 'Presidential Rose Gold Design',
-    description: 'The epitome of elegance. Our Presidential suite cabin in a stunning rose gold finish, combining technology and artistry.'
+    description: 'The epitome of elegance. Our Presidential suite cabin in a stunning rose gold finish, combining technology and artistry.',
+    isYoutube: true,
   },
   {
     src: '/Videos/TRANSPARENT ROSE GOLD.mp4',
     title: 'Transparent Rose Gold Lift',
-    description: 'A breathtaking panoramic elevator with rose gold accents, offering stunning views and a futuristic feel.'
+    description: 'A breathtaking panoramic elevator with rose gold accents, offering stunning views and a futuristic feel.',
+    isYoutube: false,
   },
   {
-    src: '/Videos/06.mp4',
+    src: 'https://www.youtube.com/embed/UZVyRqLhmkY',
     title: 'Modern Commercial Installation',
-    description: 'A versatile and sleek elevator designed for high-traffic commercial spaces, demonstrating smooth, reliable operation.'
+    description: 'A versatile and sleek elevator designed for high-traffic commercial spaces, demonstrating smooth, reliable operation.',
+    isYoutube: true,
   }
 ];
 
@@ -94,8 +100,25 @@ export default function VideosPageClient() {
           variants={gridVariants}
         >
             {videos.map((video, index) => (
-              <motion.div key={index} variants={itemVariants}>
-                <VideoPlayer src={video.src} title={video.title} description={video.description} />
+              <motion.div key={index} variants={itemVariants} className="bg-gray-900/50 backdrop-blur-sm rounded-lg overflow-hidden shadow-lg border border-white/10">
+                {video.isYoutube ? (
+                  <div className="aspect-video">
+                    <iframe
+                      src={video.src}
+                      title={video.title}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      className="w-full h-full"
+                    ></iframe>
+                  </div>
+                ) : (
+                  <VideoPlayer src={video.src} title={video.title} />
+                )}
+                <div className="p-6">
+                  <h3 className="font-heading text-xl font-bold text-[#D4AF37]">{video.title}</h3>
+                  <p className="text-white/70 mt-2 text-sm">{video.description}</p>
+                </div>
               </motion.div>
             ))}
         </motion.div>

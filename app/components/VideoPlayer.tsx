@@ -6,10 +6,9 @@ import { Play, Pause, Maximize } from 'lucide-react';
 interface VideoPlayerProps {
     src: string;
     title: string;
-    description: string;
 }
 
-export const VideoPlayer = ({ src, title, description }: VideoPlayerProps) => {
+export const VideoPlayer = ({ src, title }: VideoPlayerProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -34,12 +33,12 @@ export const VideoPlayer = ({ src, title, description }: VideoPlayerProps) => {
   };
 
   return (
-    <div className="bg-[#1C1C1C] border border-white/10 rounded-xl overflow-hidden group transition-all duration-300 transform hover:-translate-y-2 hover:border-[#D4AF37] hover:shadow-2xl hover:shadow-[#D4AF37]/20">
-      <div className="relative">
+    <div className="relative group">
         <video
           ref={videoRef}
           src={src}
-          className="w-full h-auto aspect-video object-cover"
+          title={title}
+          className="w-full h-auto aspect-video object-cover rounded-t-lg"
           onClick={handlePlayPause}
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
@@ -52,11 +51,6 @@ export const VideoPlayer = ({ src, title, description }: VideoPlayerProps) => {
                 <Maximize size={20} />
             </button>
         </div>
-      </div>
-      <div className="p-6">
-        <h3 className="font-heading text-xl font-semibold text-[#D4AF37] mb-2">{title}</h3>
-        <p className="text-white/70">{description}</p>
-      </div>
     </div>
   );
 }; 
