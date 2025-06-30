@@ -5,13 +5,13 @@ import { motion, Variants } from 'framer-motion';
 import ScrollingLogos from './ScrollingLogos';
 
 const clients = [
-  { src: '/Clientage/Clients/GD Goenka.png', name: 'GD Goenka School', caption: "Leading educational institution known for its modern infrastructure." },
+  { src: '/Clientage/Clients/GD_Goenka.png', name: 'GD Goenka School', caption: "Leading educational institution known for its modern infrastructure." },
   { src: '/Clientage/Clients/GNIOT.png', name: 'GNIOT Group', caption: "A premier hub for technical and management education." },
   { src: '/Clientage/Clients/bikanerwala.png', name: 'Bikanerwala', caption: "Iconic brand for traditional Indian sweets and cuisine." },
-  { src: '/Clientage/Clients/Clarks inn.avif', name: 'Clarks Inn', caption: "Distinguished name in the hospitality sector, offering luxury stays." },
-  { src: '/Clientage/Clients/Rising Group.png', name: 'Rising Group', caption: "Prominent real estate developers creating landmark properties." },
+  { src: '/Clientage/Clients/Clarks_inn.avif', name: 'Clarks Inn', caption: "Distinguished name in the hospitality sector, offering luxury stays." },
+  { src: '/Clientage/Clients/Rising_Group.png', name: 'Rising Group', caption: "Prominent real estate developers creating landmark properties." },
   { src: '/Clientage/Clients/VPElectronics.png', name: 'VP Electronics', caption: "Trusted provider of a wide range of electronic components." },
-  { src: '/Clientage/Clients/Gyaananada School.jpeg', name: 'Gyaananada School', caption: "A progressive school focused on holistic child development." },
+  { src: '/Clientage/Clients/Gyaananada_School.jpeg', name: 'Gyaananada School', caption: "A progressive school focused on holistic child development." },
 ];
 
 const collaborations = [
@@ -19,7 +19,7 @@ const collaborations = [
   { src: '/Clientage/Collaborations/Fermator.png', name: 'Fermator', caption: 'Global leader in manufacturing automatic elevator doors.' },
   { src: '/Clientage/Collaborations/JSLN.png', name: 'JSLN', caption: 'Expert manufacturers of high-quality steel products.' },
   { src: '/Clientage/Collaborations/Marazzi.png', name: 'Marazzi', caption: 'World-renowned brand for premium ceramic and porcelain tiles.' },
-  { src: '/Clientage/Collaborations/Montanari Group.png', name: 'Montanari Group', caption: 'Leading producers of gearboxes, motors, and components for elevators.' },
+  { src: '/Clientage/Collaborations/Montanari_Group.png', name: 'Montanari Group', caption: 'Leading producers of gearboxes, motors, and components for elevators.' },
   { src: '/Clientage/Collaborations/NBSL.png', name: 'NBSL', caption: 'Specialists in elevator safety and braking systems.' },
   { src: '/Clientage/Collaborations/Tectronics.jpg', name: 'Tectronics', caption: 'Providers of advanced electronic solutions for various industries.' },
   { src: '/Clientage/Collaborations/torindrive.png', name: 'Torin Drive', caption: 'Global supplier of elevator traction machines and motors.' },
