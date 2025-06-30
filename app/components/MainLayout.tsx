@@ -46,20 +46,20 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
     { name: 'Products', href: '/products/passenger', subLinks: productLinks },
     { name: 'Gallery', href: '/gallery' },
     { name: 'Videos', href: '/videos' },
-    { name: 'Clientage', href: '/clientage' },
+    { name: 'Clients', href: '/clients' },
     { name: 'Certifications', href: '/certifications' },
   ];
 
   return (
     <>
       <nav className={`fixed top-0 w-full z-50 transition-colors duration-500 ${isScrolled || mobileMenuOpen ? 'bg-black border-b border-white/10' : 'bg-transparent'}`}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
             <div className="flex items-center justify-between">
               <Link href="/" className="flex items-center space-x-2 sm:space-x-4">
-                <Image src="/logo-og.jpeg" alt="Lubeck Elevators Logo" width={50} height={50} className="rounded-lg" />
+                <Image src="/logo-og.jpeg" alt="Lubeck Elevators Logo" width={60} height={60} className="rounded-lg" />
                 <div>
-                  <div className="font-heading text-lg sm:text-xl font-bold text-[#D4AF37]">Lubeck Elevators</div>
-                  <div className="text-xs text-white/70">Lifting With Luxury</div>
+                  <div className="font-heading text-xl sm:text-2xl font-bold text-[#D4AF37]">Lubeck Elevators</div>
+                  <div className="text-sm text-white/70">Lifting With Luxury</div>
                 </div>
               </Link>
               {/* Desktop Nav */}
@@ -85,7 +85,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                 </div>
                 <Link href="/gallery" className="hover:text-[#D4AF37] transition-colors duration-300">Gallery</Link>
                 <Link href="/videos" className="hover:text-[#D4AF37] transition-colors duration-300">Videos</Link>
-                <Link href="/clientage" className="hover:text-[#D4AF37] transition-colors duration-300">Clientage</Link>
+                <Link href="/clients" className="hover:text-[#D4AF37] transition-colors duration-300">Clients</Link>
                 <Link href="/certifications" className="hover:text-[#D4AF37] transition-colors duration-300">Certifications</Link>
                 <Link href="/contact" className="px-5 py-2 bg-[#D4AF37] text-black font-semibold rounded-md transition-all duration-300 hover:bg-[#FFD700] hover:shadow-[0_0_20px_rgba(255,215,0,0.5)]">Contact Us</Link>
               </div>

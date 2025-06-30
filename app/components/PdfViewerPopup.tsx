@@ -44,14 +44,20 @@ export default function PdfViewerPopup({ file, name, onClose }: PdfViewerPopupPr
   }
 
   return (
-    <div className="fixed inset-0 bg-black/90 z-[100] flex flex-col items-center justify-center">
+    <div 
+      className="fixed inset-0 bg-black/90 z-[9999] flex flex-col items-center justify-center"
+      onClick={onClose}
+    >
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 bg-gray-800/50 hover:bg-red-500/80 text-white rounded-full p-2 z-[101] transition-colors"
+        className="absolute top-4 right-4 bg-gray-800/50 hover:bg-red-500/80 text-white rounded-full p-2 z-[10000] transition-colors"
       >
         <X size={24} />
       </button>
-      <div className="w-full h-full p-2 md:p-8 overflow-auto">
+      <div 
+        className="w-full h-full p-2 md:p-8 overflow-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
         <h3 className="text-xl md:text-2xl font-bold text-center text-[#D4AF37] mb-4">{name}</h3>
         <Document
           file={file}

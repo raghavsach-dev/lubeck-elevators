@@ -6,10 +6,10 @@ import { motion, Variants } from 'framer-motion';
 
 const videos = [
   {
-    src: '/Videos/NANITAL 2 LIFT HANDOVER.mp4',
+    src: 'https://www.youtube.com/embed/8C8XAFVCc6A',
     title: 'Nainital Project Handover',
     description: 'A showcase of the seamless integration and final handover of our dual-lift installation in a prestigious Nainital property.',
-    isYoutube: false,
+    isYoutube: true,
   },
   {
     src: 'https://www.youtube.com/embed/mfV0UB0U7DA',
@@ -30,10 +30,10 @@ const videos = [
     isYoutube: true,
   },
   {
-    src: '/Videos/TRANSPARENT ROSE GOLD.mp4',
+    src: 'https://www.youtube.com/embed/nASX_0NIhMA',
     title: 'Transparent Rose Gold Lift',
     description: 'A breathtaking panoramic elevator with rose gold accents, offering stunning views and a futuristic feel.',
-    isYoutube: false,
+    isYoutube: true,
   },
   {
     src: 'https://www.youtube.com/embed/UZVyRqLhmkY',

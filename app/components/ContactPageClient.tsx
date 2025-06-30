@@ -201,7 +201,7 @@ export default function ContactPageClient() {
                 </div>
               )}
                <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.064751574877!2d77.28735979999999!3d28.657779800000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfb0e4bda55f3%3A0xb876c6112cdd1222!2sLubeck%20Elevators!5e0!3m2!1sen!2sin!4v1751016357089!5m2!1sen!2sin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.994402015806!2d77.30356077563776!3d28.65988628283778!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfb00571035f1%3A0x55186f3d630bc63!2sLubeck%20elevators!5e0!3m2!1sen!2sin!4v1751279850441!5m2!1sen!2sin"
                 width="100%"
                 height="100%"
                 style={{ border: 0, visibility: isMapLoading ? 'hidden' : 'visible' }}

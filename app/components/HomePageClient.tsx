@@ -34,14 +34,16 @@ const allImages: Image[] = [
 
 const videoPreviews = [
   {
-    src: '/Videos/PRESIDENTIAL ROSE GOLD DESIGN.mp4',
+    src: 'https://www.youtube.com/embed/uuFONTS2xEM',
     title: 'Presidential Rose Gold Design',
-    description: 'The epitome of elegance. Our Presidential suite cabin in a stunning rose gold finish, combining technology and artistry.'
+    description: 'The epitome of elegance. Our Presidential suite cabin in a stunning rose gold finish, combining technology and artistry.',
+    isYoutube: true,
   },
   {
-    src: '/Videos/TRANSPARENT ROSE GOLD.mp4',
+    src: 'https://www.youtube.com/embed/nASX_0NIhMA',
     title: 'Transparent Rose Gold Lift',
-    description: 'A breathtaking panoramic elevator with rose gold accents, offering stunning views and a futuristic feel.'
+    description: 'A breathtaking panoramic elevator with rose gold accents, offering stunning views and a futuristic feel.',
+    isYoutube: true,
   }
 ];
 
@@ -90,7 +92,7 @@ export default function HomePageClient() {
           loop 
           muted 
           playsInline
-          className="absolute z-0 w-full h-full object-cover"
+          className="absolute z-0 w-full h-full object-cover sm:scale-105 sm:translate-x-[1.3%]"
         >
           <source src="/Final.mp4" type="video/mp4" />
           Your browser does not support the video tag.
@@ -265,7 +267,20 @@ export default function HomePageClient() {
           <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-10" variants={containerVariants}>
             {videoPreviews.map((video, index) => (
                 <motion.div key={index} variants={cardVariants} className="bg-[#1C1C1C] border border-white/10 rounded-xl overflow-hidden group transition-all duration-300 transform hover:-translate-y-2 hover:border-[#D4AF37] hover:shadow-2xl hover:shadow-[#D4AF37]/20">
-                  <VideoPlayer src={video.src} title={video.title} />
+                  {video.isYoutube ? (
+                    <div className="aspect-video">
+                      <iframe
+                        src={video.src}
+                        title={video.title}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                        className="w-full h-full"
+                      ></iframe>
+                    </div>
+                  ) : (
+                    <VideoPlayer src={video.src} title={video.title} />
+                  )}
                   <div className="p-6">
                     <h3 className="font-heading text-xl font-semibold text-[#D4AF37] mb-2">{video.title}</h3>
                     <p className="text-white/70">{video.description}</p>
