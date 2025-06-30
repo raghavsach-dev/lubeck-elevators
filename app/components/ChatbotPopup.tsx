@@ -26,6 +26,7 @@ export default function ChatbotPopup({ mobileMenuOpen }: { mobileMenuOpen?: bool
 
     const router = useRouter();
     const messagesEndRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -34,12 +35,27 @@ export default function ChatbotPopup({ mobileMenuOpen }: { mobileMenuOpen?: bool
     useEffect(scrollToBottom, [messages, view]);
 
     useEffect(() => {
-      if (isOpen && messages.length === 0) {
-        setMessages([
-          { role: 'assistant', content: "Hi! I'm the Lubeck Assistant. How can I help you today? You can ask me about our products, company, or request a consultation." }
-        ]);
-      }
+        if (isOpen && view === 'chat') {
+            setTimeout(() => inputRef.current?.focus(), 100);
+        }
+    }, [isOpen, view]);
+
+    useEffect(() => {
+        if (isOpen && messages.length === 0) {
+            setMessages([
+                { role: 'assistant', content: "Hi! I'm the Lubeck Assistant. How can I help you today? You can ask me about our products, company, or request a consultation." }
+            ]);
+        }
     }, [isOpen, messages.length]);
+
+    useEffect(() => {
+        if (isOpen && view === 'chat' && !isLoading && messages.length > 0) {
+            const lastMessage = messages[messages.length - 1];
+            if (lastMessage.role === 'assistant') {
+                inputRef.current?.focus();
+            }
+        }
+    }, [messages, isLoading, isOpen, view]);
 
     const handleSendMessage = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -255,21 +271,22 @@ export default function ChatbotPopup({ mobileMenuOpen }: { mobileMenuOpen?: bool
                         </div>
 
                         {view === 'chat' && (
-                           <footer className="p-4 border-t border-white/10">
-                                <form onSubmit={handleSendMessage} className="flex items-center gap-2">
+                            <div className="p-4 border-t border-white/10">
+                                <form onSubmit={handleSendMessage} className="flex items-center gap-3">
                                     <input
+                                        ref={inputRef}
                                         type="text"
                                         value={input}
                                         onChange={(e) => setInput(e.target.value)}
-                                        placeholder="Ask a question..."
-                                        className="flex-1 bg-black/50 border-none rounded-lg p-3 focus:ring-1 focus:ring-[#D4AF37] text-white"
+                                        placeholder="Ask about our elevators..."
+                                        className="flex-1 bg-black/50 border border-white/20 rounded-lg p-3 focus:ring-1 focus:ring-[#D4AF37] focus:border-[#D4AF37] text-white"
                                         disabled={isLoading}
                                     />
-                                    <button type="submit" className="p-3 bg-[#D4AF37] rounded-full text-black disabled:opacity-50" disabled={!input.trim() || isLoading}>
-                                        <Send className="w-5 h-5" />
+                                    <button type="submit" disabled={isLoading} className="bg-[#D4AF37] p-3 rounded-lg text-black disabled:bg-gray-600">
+                                        {isLoading ? <Loader className="w-6 h-6 animate-spin" /> : <Send className="w-6 h-6" />}
                                     </button>
                                 </form>
-                            </footer>
+                            </div>
                         )}
                     </motion.div>
                 )}

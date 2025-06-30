@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { VideoPlayer } from './VideoPlayer';
 import dynamic from 'next/dynamic';
 import { motion, Variants } from 'framer-motion';
+import { imageData } from './galleryData';
 
 const PdfViewerPopup = dynamic(() => import('./PdfViewerPopup'), {
     ssr: false,
@@ -31,6 +32,15 @@ const allImages: Image[] = [
   { src: '/Designs/d32640dded209308e754e4d6ec2b22d4.jpg', caption: 'Understated sophistication with muted tones and clean lines.' },
   { src: '/Designs/efd8c8f9a88131665e567ecaaa20d757.jpg', caption: 'Art deco inspired cabin with geometric patterns and rich textures.' },
 ];
+
+const galleryPreviews = Object.keys(imageData).map(category => {
+  const categoryKey = category as keyof typeof imageData;
+  return {
+    ...imageData[categoryKey][0],
+    category: categoryKey.replace(/_/g, ' '),
+    id: categoryKey
+  };
+});
 
 const videoPreviews = [
   {
@@ -206,45 +216,38 @@ export default function HomePageClient() {
         <div className="max-w-7xl mx-auto px-6">
           <motion.div variants={itemVariants} className="text-center mb-12 sm:mb-16">
             <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Our <span className="text-[#D4AF37]">Gallery</span></h2>
-            <p className="text-base md:text-lg text-white/60 max-w-3xl mx-auto">Explore a selection of our finest elevator designs, where innovation meets luxury.</p>
+            <p className="text-base md:text-lg text-white/60 max-w-3xl mx-auto">A glimpse into our world of bespoke elevator designs. Each collection tells a unique story of luxury and innovation.</p>
           </motion.div>
-          <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" variants={containerVariants}>
-            {galleryImages.map((image, index) => (
-              <motion.div key={index} variants={cardVariants}>
-                {/* Mobile and Tablet View: Caption Below Image */}
-                <div className="sm:hidden bg-[#1C1C1C] rounded-xl border border-white/10 overflow-hidden">
-                  <Image 
-                    src={image.src} 
-                    alt={image.caption}
-                    width={400} 
-                    height={600} 
-                    className="object-cover w-full h-80"
-                  />
-                  <div className="p-4">
-                    <p className="text-white text-base font-semibold">{image.caption}</p>
+          <motion.div 
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+            variants={containerVariants}
+          >
+            {galleryPreviews.map((image) => (
+              <motion.div key={image.id} variants={cardVariants}>
+                <Link href={`/gallery#${image.id}`}>
+                  <div className="group relative overflow-hidden rounded-xl border border-white/10 transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4AF37]/20 hover:scale-105">
+                    <Image 
+                      src={image.src} 
+                      alt={image.title}
+                      width={400} 
+                      height={500} 
+                      className="object-cover w-full h-96 transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                      <div className="text-center">
+                        <h3 className="text-2xl font-bold text-white tracking-widest uppercase">{image.category}</h3>
+                      </div>
+                    </div>
+                     {/* Golden glow effect */}
+                    <div className="absolute inset-0 border-4 border-transparent rounded-xl group-hover:border-[#D4AF37] transition-all duration-500 opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100"></div>
                   </div>
-                </div>
-
-                {/* Desktop View: Hover Effect */}
-                <div className="hidden sm:block group relative overflow-hidden rounded-xl border border-white/10 transition-all duration-500 hover:shadow-2xl hover:shadow-[#D4AF37]/20 hover:scale-105">
-                  <Image 
-                    src={image.src} 
-                    alt={image.caption}
-                    width={400} 
-                    height={600} 
-                    className="object-cover w-full h-96 transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <div className="absolute bottom-0 left-0 w-full p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <p className="text-white text-lg font-semibold transform-gpu translate-y-4 group-hover:translate-y-0 transition-transform duration-500">{image.caption}</p>
-                  </div>
-                </div>
+                </Link>
               </motion.div>
             ))}
           </motion.div>
           <motion.div variants={itemVariants} className="mt-12 text-center">
-            <Link href="/gallery" className="px-8 py-3 bg-[#D4AF37] text-black font-semibold rounded-lg transition-all duration-300 hover:bg-[#FFD700] hover:scale-105">
-              See More
+            <Link href="/gallery" className="px-8 py-3 bg-[#D4AF37] text-black font-semibold rounded-lg transition-all duration-300 hover:bg-[#FFD700] hover:scale-105 transform hover:-translate-y-1">
+              Explore All Designs
             </Link>
           </motion.div>
         </div>

@@ -50,6 +50,12 @@ export async function POST(req: NextRequest) {
       Our Clients include prestigious names like: VP Electronics, Bikanerwala, GNIOT Group of Institutions, Rising Group, Clarks Inn, GD Goenka School, and Gyaananada School.
       
       Our Collaborations with leading global manufacturers include: Tectronics, Weco, Fermator, JSLN, Torin Drive, NBSL, Arkel, Montanari Group, and Marazzi.
+    
+      Our Design Galleries: We offer several distinct design collections to suit any aesthetic:
+      - Majesty: A grand collection defined by golden accents and intricate geometric patterns, exuding pure majesty.
+      - Imperial Gold Edition: An opulent collection featuring a breathtaking fusion of design and light for a truly memorable journey.
+      - Prestige Edition: A modern and stylish collection with sleek lines and high-contrast designs for those who command respect.
+      - Classic Edition: A timeless collection that captures elegance with polished wood, warm lighting, and enduring style.
     `;
 
     const systemInstruction = `
