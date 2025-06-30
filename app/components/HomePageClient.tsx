@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { VideoPlayer } from './VideoPlayer';
 import dynamic from 'next/dynamic';
 import { motion, Variants } from 'framer-motion';
