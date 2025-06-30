@@ -13,26 +13,6 @@ const PdfViewerPopup = dynamic(() => import('./PdfViewerPopup'), {
     loading: () => <div className="fixed inset-0 bg-black/90 z-[100] flex items-center justify-center"><div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-[#D4AF37]"></div></div> 
 });
 
-interface Image {
-  src: string;
-  caption: string;
-}
-
-const allImages: Image[] = [
-  { src: '/Designs/9d4b2b9da404f11fa7df56272cde503c.jpg', caption: 'Elegant wood-paneled interior with ambient lighting.' },
-  { src: '/Designs/24da2f83a945c0930141f1105f89005c.jpg', caption: 'Sleek, futuristic design with integrated LED display.' },
-  { src: '/Designs/da3f9a502b528f166209894b998a6794.jpg', caption: 'Minimalist interior featuring brushed metal and glass.' },
-  { src: '/Designs/d702a70ab6fdca1c49c5ca7b05e942ba.jpg', caption: 'Spacious and accessible design, perfect for commercial use.' },
-  { src: '/Designs/e667214d993fa4d1ebb4a39f8264e753.jpg', caption: 'Luxurious gold-accented cabin for a premium experience.' },
-  { src: '/Designs/f3f633de0f0b3597bc5f43eb4e9bc68d.jpg', caption: 'Modern design combining functionality with high-end aesthetics.' },
-  { src: '/Designs/57a751ae5177f201965c52846a7d41c5.jpg', caption: 'Classic elegance with polished marble and ornate details.' },
-  { src: '/Designs/81be1a2070bedbe959b8eaa5446cd395.jpg', caption: 'High-tech cabin with panoramic glass walls for stunning views.' },
-  { src: '/Designs/44eeea10436060595609ebb253d000fb.jpg', caption: 'Robust and functional design for industrial applications.' },
-  { src: '/Designs/b24307517bb46aab1d479675cb8cbd69.jpg', caption: 'Vibrant and contemporary look with bold colors and patterns.' },
-  { src: '/Designs/d32640dded209308e754e4d6ec2b22d4.jpg', caption: 'Understated sophistication with muted tones and clean lines.' },
-  { src: '/Designs/efd8c8f9a88131665e567ecaaa20d757.jpg', caption: 'Art deco inspired cabin with geometric patterns and rich textures.' },
-];
-
 const galleryPreviews = Object.keys(imageData).map(category => {
   const categoryKey = category as keyof typeof imageData;
   return {
@@ -57,26 +37,8 @@ const videoPreviews = [
   }
 ];
 
-const shuffleArray = (array: Image[]): Image[] => {
-  let currentIndex = array.length, randomIndex;
-
-  while (currentIndex !== 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
-  }
-
-  return array;
-};
-
-
 export default function HomePageClient() {
-  const [galleryImages, setGalleryImages] = useState<Image[]>([]);
   const [isCatalogOpen, setIsCatalogOpen] = useState(false);
-
-  useEffect(() => {
-    setGalleryImages(shuffleArray([...allImages]).slice(0, 3));
-  }, []);
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
