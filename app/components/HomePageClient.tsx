@@ -150,7 +150,7 @@ export default function HomePageClient() {
                 Founded on the principles of innovation and excellence, Lubeck Elevators has been a leader in the vertical transportation industry for over two decades. We are dedicated to delivering superior quality, safety, and reliability in every project.
               </p>
               <p className="text-base md:text-lg text-white/80 mb-6 leading-relaxed">
-                Our journey began with a simple mission: to merge German engineering precision with bespoke luxury, creating vertical transport solutions that are not just functional, but are statements of style and sophistication. We believe an elevator should be an integral part of the building's architecture, reflecting its character and enhancing the user experience.
+                Our journey began with a simple mission: to merge German engineering precision with bespoke luxury, creating vertical transport solutions that are not just functional, but are statements of style and sophistication. We believe an elevator should be an integral part of the building&apos;s architecture, reflecting its character and enhancing the user experience.
               </p>
               <p className="text-base md:text-lg text-white/80 mb-6 leading-relaxed">
                 Every Lubeck elevator is a masterpiece of craftsmanship, built with an unwavering attention to detail and a commitment to using only the highest quality materials. Our dedicated team of engineers, designers, and technicians work in synergy to ensure that every installation is seamless, efficient, and exceeds the highest standards of safety and performance.
