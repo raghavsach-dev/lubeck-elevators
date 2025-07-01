@@ -184,7 +184,7 @@ export default function ContactPageClient() {
           >
             <div>
               <h3 className="font-heading text-xl sm:text-2xl font-bold text-[#D4AF37] mb-3">Head Office</h3>
-              <p className="text-sm md:text-base text-white/80">A 264, SURJAMLA VIHAR , DELHI 110092</p>
+              <p className="text-sm md:text-base text-white/80">A 264, SURAJMAL VIHAR , DELHI 110092</p>
               <p className="text-sm md:text-base text-white/80 mt-1">Email: LUBECKELEVATOR@GMAIL.COM</p>
               <p className="text-sm md:text-base text-white/80 mt-1">Phone: +91-9811013981, +91-9310465077</p>
             </div>

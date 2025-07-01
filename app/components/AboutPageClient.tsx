@@ -157,20 +157,20 @@ export default function AboutPageClient() {
               <motion.div variants={itemVariants} className="space-y-8 text-center md:text-left">
                 <div>
                   <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-[#D4AF37] mb-4">Our Mission</h2>
-                  <p className="text-base md:text-lg text-white/80 leading-relaxed">To ascend as the premier elevator company by delivering unparalleled vertical transportation solutions. We are committed to innovation, quality, and customer satisfaction, ensuring every journey with Lubeck Elevators is a testament to our dedication to excellence.</p>
+                  <p className="text-base md:text-lg text-white/80 leading-relaxed">To ascend as the premier elevator company by delivering unparalleled vertical transportation solutions. We are committed to innovation, quality, and customer satisfaction, ensuring every journey with Lubeck Elevators is a testament to our dedication to excellence. This commitment drives us to meticulously source the finest materials, employ world-class manufacturing processes, and provide comprehensive support from initial design to lifelong maintenance. We aim to build lasting relationships with our clients, founded on trust and a shared passion for architectural brilliance. Our goal is not just to meet expectations, but to consistently exceed them, setting a new paradigm for service and reliability in the industry.</p>
                 </div>
                 <div>
                   <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-[#D4AF37] mb-4">Our Vision</h2>
-                  <p className="text-base md:text-lg text-white/80 leading-relaxed">To redefine the standards of the elevator industry by integrating cutting-edge technology with sustainable practices. We envision a future where our elevators not only enhance accessibility but also contribute to smarter, more efficient urban environments, elevating the quality of life for all.</p>
+                  <p className="text-base md:text-lg text-white/80 leading-relaxed">To redefine the standards of the elevator industry by integrating cutting-edge technology with sustainable practices. We envision a future where our elevators not only enhance accessibility but also contribute to smarter, more efficient urban environments. Our forward-thinking approach embraces IoT-enabled smart features for predictive maintenance, energy-efficient drive systems, and regenerative technologies that minimize environmental impact, setting new benchmarks for the industry worldwide. We aspire to be a global leader, synonymous with innovation and responsible engineering, shaping the future of vertical mobility for generations to come.</p>
                 </div>
               </motion.div>
-              <motion.div variants={itemVariants} className="rounded-xl overflow-hidden shadow-2xl order-first md:order-last">
+              <motion.div variants={itemVariants} className="rounded-xl overflow-hidden shadow-2xl max-w-sm mx-auto">
                 <Image 
                   src="/lift-sample.jpg" 
                   alt="Modern elevator" 
                   width={600} 
                   height={800} 
-                  className="object-cover w-full h-full"
+                  className="object-cover w-full h-auto"
                 />
               </motion.div>
             </div>

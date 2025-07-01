@@ -172,7 +172,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             </div>
             <div>
               <h3 className="font-heading text-lg text-white mb-3">Contact Info</h3>
-              <p className="text-sm">A 264, SURJAMLA VIHAR , DELHI 110092</p>
+              <p className="text-sm">A 264, SURAJMAL VIHAR , DELHI 110092</p>
               <p className="text-sm mt-1">LUBECKELEVATOR@GMAIL.COM</p>
               <p className="text-sm mt-1">+91-9811013981, +91-9310465077</p>
             </div>

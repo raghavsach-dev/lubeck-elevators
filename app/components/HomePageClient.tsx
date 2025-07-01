@@ -76,8 +76,8 @@ export default function HomePageClient() {
           animate="visible"
           variants={containerVariants}
         >
-          <motion.h1 variants={itemVariants} className="font-heading text-4xl sm:text-5xl md:text-7xl font-bold mb-6">
-            <span className="text-white">Elevating</span> <span className="text-gradient-gold">Excellence</span>
+          <motion.h1 variants={itemVariants} className="font-heading text-4xl sm:text-5xl md:text-7xl font-bold mb-6 relative left-8">
+            <span className="text-white">Elevating</span> <span className="text-white">Excellence</span>
           </motion.h1>
           <motion.p variants={itemVariants} className="text-base md:text-lg text-white/80 mb-10 max-w-3xl mx-auto">
             Experience the pinnacle of vertical transportation. We deliver premium elevator solutions that combine cutting-edge technology with uncompromising luxury.
@@ -149,17 +149,23 @@ export default function HomePageClient() {
               <p className="text-base md:text-lg text-white/80 mb-6 leading-relaxed">
                 Founded on the principles of innovation and excellence, Lubeck Elevators has been a leader in the vertical transportation industry for over two decades. We are dedicated to delivering superior quality, safety, and reliability in every project.
               </p>
+              <p className="text-base md:text-lg text-white/80 mb-6 leading-relaxed">
+                Our journey began with a simple mission: to merge German engineering precision with bespoke luxury, creating vertical transport solutions that are not just functional, but are statements of style and sophistication. We believe an elevator should be an integral part of the building's architecture, reflecting its character and enhancing the user experience.
+              </p>
+              <p className="text-base md:text-lg text-white/80 mb-6 leading-relaxed">
+                Every Lubeck elevator is a masterpiece of craftsmanship, built with an unwavering attention to detail and a commitment to using only the highest quality materials. Our dedicated team of engineers, designers, and technicians work in synergy to ensure that every installation is seamless, efficient, and exceeds the highest standards of safety and performance.
+              </p>
               <Link href="/about" className="px-8 py-3 bg-transparent text-[#D4AF37] font-semibold rounded-lg border-2 border-[#D4AF37] transition-all duration-300 hover:bg-[#D4AF37] hover:text-black transform hover:-translate-y-1">
                 Read More
               </Link>
             </motion.div>
-             <motion.div variants={itemVariants} className="rounded-xl overflow-hidden shadow-2xl h-80 order-first md:order-last">
+             <motion.div variants={itemVariants} className="rounded-xl overflow-hidden shadow-2xl max-w-sm mx-auto">
           <Image
                 src="/lift-sample.jpg" 
                 alt="Lubeck elevator interior" 
                 width={600} 
-                height={400}
-                className="object-cover w-full h-full"
+                height={800}
+                className="object-cover w-full h-auto"
               />
             </motion.div>
           </div>

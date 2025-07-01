@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
       Our founder is Mr. Parveen Gupta, and the company has over 15 years of industry experience.
 
       Contact Information:
-      - Head Office Address: A 264, SURJAMLA VIHAR , DELHI 110092
+      - Head Office Address: A 264, SURAJMAL VIHAR , DELHI 110092
       - Email: LUBECKELEVATOR@GMAIL.COM
       - Phone: +91-9811013981, +91-9310465077
       - Branch Offices: NOIDA SEC 135, HALDWANI, JODHPUR (RAJASTHAN), MANALI, GURUGRAM, FARIDABAD.
