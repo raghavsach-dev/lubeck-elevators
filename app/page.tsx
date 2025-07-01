@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import HomePageClient from './components/HomePageClient';
 
 export const metadata: Metadata = {
-  title: 'Home',
+  title: 'Home | Lubeck Elevators',
   description: 'Welcome to Lubeck Elevators, where we provide luxury elevator solutions for residential and commercial properties. Lifting with luxury since 2009.',
 };
 
