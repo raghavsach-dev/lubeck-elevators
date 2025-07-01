@@ -19,9 +19,11 @@ interface PdfViewerPopupProps {
   file: string;
   name: string;
   onClose: () => void;
+  activeCatalog: 'Main' | 'LOP';
+  onCatalogSelect: (catalog: 'Main' | 'LOP') => void;
 }
 
-export default function PdfViewerPopup({ file, name, onClose }: PdfViewerPopupProps) {
+export default function PdfViewerPopup({ file, name, onClose, activeCatalog, onCatalogSelect }: PdfViewerPopupProps) {
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageWidth, setPageWidth] = useState<number | null>(null);
 
@@ -54,8 +56,9 @@ export default function PdfViewerPopup({ file, name, onClose }: PdfViewerPopupPr
       >
         <X size={24} />
       </button>
+
       <div 
-        className="w-full h-full p-2 md:p-8 overflow-auto"
+        className="w-full h-full p-2 md:p-8 overflow-auto pb-24"
         onClick={(e) => e.stopPropagation()}
       >
         <h3 className="text-xl md:text-2xl font-bold text-center text-[#D4AF37] mb-4">{name}</h3>
@@ -75,6 +78,32 @@ export default function PdfViewerPopup({ file, name, onClose }: PdfViewerPopupPr
             </div>
           ))}
         </Document>
+      </div>
+
+      <div 
+        className="absolute bottom-0 left-0 right-0 h-20 bg-black/80 backdrop-blur-sm border-t border-white/10 flex justify-center items-center gap-4 px-4 z-[10000]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          onClick={() => onCatalogSelect('Main')}
+          className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
+            activeCatalog === 'Main'
+              ? 'bg-[#D4AF37] text-black shadow-[0_0_15px_rgba(212,175,55,0.4)]'
+              : 'bg-gray-800/50 text-white/70 hover:bg-gray-700/70'
+          }`}
+        >
+          Main Catalog
+        </button>
+        <button
+          onClick={() => onCatalogSelect('LOP')}
+          className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
+            activeCatalog === 'LOP'
+              ? 'bg-[#D4AF37] text-black shadow-[0_0_15px_rgba(212,175,55,0.4)]'
+              : 'bg-gray-800/50 text-white/70 hover:bg-gray-700/70'
+          }`}
+        >
+          LOP Catalog
+        </button>
       </div>
     </div>
   );

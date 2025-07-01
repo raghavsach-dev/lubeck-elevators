@@ -37,8 +37,10 @@ const videoPreviews = [
   }
 ];
 
+type CatalogType = 'Main' | 'LOP';
+
 export default function HomePageClient() {
-  const [isCatalogOpen, setIsCatalogOpen] = useState(false);
+  const [activeCatalog, setActiveCatalog] = useState<CatalogType | null>(null);
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -87,7 +89,7 @@ export default function HomePageClient() {
               Request a Quote
             </Link>
             <button
-              onClick={() => setIsCatalogOpen(true)}
+              onClick={() => setActiveCatalog('Main')}
               className="px-8 py-3 bg-transparent border border-white/50 text-white font-semibold rounded-md transition-all duration-300 hover:bg-white/10 hover:border-white w-full sm:w-auto"
             >
               View Catalog
@@ -267,11 +269,13 @@ export default function HomePageClient() {
         </div>
       </motion.section>
 
-      {isCatalogOpen && (
+      {activeCatalog && (
         <PdfViewerPopup
-          file="/Main_Catalogue.pdf"
-          name="Main Catalog"
-          onClose={() => setIsCatalogOpen(false)}
+          file={activeCatalog === 'Main' ? '/Main_Catalogue.pdf' : '/LOP_CATELOGUE.pdf'}
+          name={`${activeCatalog} Catalog`}
+          onClose={() => setActiveCatalog(null)}
+          activeCatalog={activeCatalog}
+          onCatalogSelect={setActiveCatalog}
         />
       )}
     </>
