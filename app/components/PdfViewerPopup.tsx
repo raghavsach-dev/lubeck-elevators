@@ -19,8 +19,8 @@ interface PdfViewerPopupProps {
   file: string;
   name: string;
   onClose: () => void;
-  activeCatalog: 'Main' | 'LOP';
-  onCatalogSelect: (catalog: 'Main' | 'LOP') => void;
+  activeCatalog?: 'Main' | 'LOP';
+  onCatalogSelect?: (catalog: 'Main' | 'LOP') => void;
 }
 
 export default function PdfViewerPopup({ file, name, onClose, activeCatalog, onCatalogSelect }: PdfViewerPopupProps) {
@@ -80,31 +80,33 @@ export default function PdfViewerPopup({ file, name, onClose, activeCatalog, onC
         </Document>
       </div>
 
-      <div 
-        className="absolute bottom-0 left-0 right-0 h-20 bg-black/80 backdrop-blur-sm border-t border-white/10 flex justify-center items-center gap-4 px-4 z-[10000]"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button
-          onClick={() => onCatalogSelect('Main')}
-          className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
-            activeCatalog === 'Main'
-              ? 'bg-[#D4AF37] text-black shadow-[0_0_15px_rgba(212,175,55,0.4)]'
-              : 'bg-gray-800/50 text-white/70 hover:bg-gray-700/70'
-          }`}
+      {onCatalogSelect && activeCatalog && (
+        <div 
+          className="absolute bottom-0 left-0 right-0 h-20 bg-black/80 backdrop-blur-sm border-t border-white/10 flex justify-center items-center gap-4 px-4 z-[10000]"
+          onClick={(e) => e.stopPropagation()}
         >
-          Main Catalog
-        </button>
-        <button
-          onClick={() => onCatalogSelect('LOP')}
-          className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
-            activeCatalog === 'LOP'
-              ? 'bg-[#D4AF37] text-black shadow-[0_0_15px_rgba(212,175,55,0.4)]'
-              : 'bg-gray-800/50 text-white/70 hover:bg-gray-700/70'
-          }`}
-        >
-          LOP Catalog
-        </button>
-      </div>
+          <button
+            onClick={() => onCatalogSelect('Main')}
+            className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
+              activeCatalog === 'Main'
+                ? 'bg-[#D4AF37] text-black shadow-[0_0_15px_rgba(212,175,55,0.4)]'
+                : 'bg-gray-800/50 text-white/70 hover:bg-gray-700/70'
+            }`}
+          >
+            Main Catalog
+          </button>
+          <button
+            onClick={() => onCatalogSelect('LOP')}
+            className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
+              activeCatalog === 'LOP'
+                ? 'bg-[#D4AF37] text-black shadow-[0_0_15px_rgba(212,175,55,0.4)]'
+                : 'bg-gray-800/50 text-white/70 hover:bg-gray-700/70'
+            }`}
+          >
+            LOP Catalog
+          </button>
+        </div>
+      )}
     </div>
   );
 } 
