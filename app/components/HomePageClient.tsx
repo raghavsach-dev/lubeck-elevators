@@ -76,7 +76,7 @@ export default function HomePageClient() {
           animate="visible"
           variants={containerVariants}
         >
-          <motion.h1 variants={itemVariants} className="font-heading text-4xl sm:text-5xl md:text-7xl font-bold mb-6 relative left-8">
+          <motion.h1 variants={itemVariants} className="font-heading text-4xl sm:text-5xl md:text-7xl font-bold mb-6 relative left-0 sm:left-8">
             <span className="text-white">Elevating</span> <span className="text-white">Excellence</span>
           </motion.h1>
           <motion.p variants={itemVariants} className="text-base md:text-lg text-white/80 mb-10 max-w-3xl mx-auto">
