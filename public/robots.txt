@@ -1,0 +1,45 @@
+User-agent: *
+Allow: /
+
+# Priority pages for crawling
+Allow: /about
+Allow: /contact
+Allow: /products/
+Allow: /gallery
+Allow: /videos
+Allow: /clients
+Allow: /certifications
+
+# Sitemap location
+Sitemap: https://lubeckelevators.com/sitemap.xml
+
+# Crawl delay (optional, for being respectful to server resources)
+Crawl-delay: 1
+
+# Block specific user agents if needed (currently allowing all)
+# User-agent: BadBot
+# Disallow: /
+
+# Block admin or private areas (if any exist in the future)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Allow search engines to crawl all images
+User-agent: Googlebot-Image
+Allow: /Products/
+Allow: /Gallery/
+Allow: /Clientage/
+Allow: /Certifications/
+
+# Allow all static assets
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.avif$
+Allow: /*.pdf$
+Allow: /*.mp4$ 

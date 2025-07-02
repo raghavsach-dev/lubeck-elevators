@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  
+  <!-- Home Page -->
+  <url>
+    <loc>https://lubeckelevators.com/</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- About Page -->
+  <url>
+    <loc>https://lubeckelevators.com/about</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Contact Page -->
+  <url>
+    <loc>https://lubeckelevators.com/contact</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Products Main Page -->
+  <url>
+    <loc>https://lubeckelevators.com/products</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Passenger Elevators -->
+  <url>
+    <loc>https://lubeckelevators.com/products/passenger</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://lubeckelevators.com/Products/Passenger/1.png</image:loc>
+      <image:caption>Premium Passenger Elevator - Modern design</image:caption>
+      <image:title>Lubeck Passenger Elevator</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://lubeckelevators.com/Products/Passenger/2.png</image:loc>
+      <image:caption>Spacious passenger elevator cabin</image:caption>
+      <image:title>Passenger Elevator Interior</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Home Lifts -->
+  <url>
+    <loc>https://lubeckelevators.com/products/home</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://lubeckelevators.com/Products/Home/1.png</image:loc>
+      <image:caption>Modern home lift with sleek design</image:caption>
+      <image:title>Lubeck Home Lift</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Goods Elevators -->
+  <url>
+    <loc>https://lubeckelevators.com/products/goods</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://lubeckelevators.com/Products/Goods/1.jpg</image:loc>
+      <image:caption>Heavy-duty goods lift with wide opening</image:caption>
+      <image:title>Lubeck Goods Elevator</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Hospital Elevators -->
+  <url>
+    <loc>https://lubeckelevators.com/products/hospital</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://lubeckelevators.com/Products/Hospital/1.png</image:loc>
+      <image:caption>Spacious hospital elevator for stretchers</image:caption>
+      <image:title>Lubeck Hospital Elevator</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Capsule Lifts -->
+  <url>
+    <loc>https://lubeckelevators.com/products/capsule</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://lubeckelevators.com/Products/Capsule/1.avif</image:loc>
+      <image:caption>Panoramic glass capsule lift with external view</image:caption>
+      <image:title>Lubeck Capsule Lift</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Structure Lifts -->
+  <url>
+    <loc>https://lubeckelevators.com/products/structure</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://lubeckelevators.com/Products/Structure/1.jpg</image:loc>
+      <image:caption>External structure lift on modern building</image:caption>
+      <image:title>Lubeck Structure Lift</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Gallery Page -->
+  <url>
+    <loc>https://lubeckelevators.com/gallery</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://lubeckelevators.com/Gallery/MAJESTY/2.jpg</image:loc>
+      <image:caption>Majesty Collection - Dark & Handsome Design</image:caption>
+      <image:title>Majesty Elevator Collection</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://lubeckelevators.com/Gallery/IMPERIAL_GOLD_EDITION/1.jpg</image:loc>
+      <image:caption>Imperial Gold Edition - Pure Opulence</image:caption>
+      <image:title>Imperial Gold Elevator Collection</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Videos Page -->
+  <url>
+    <loc>https://lubeckelevators.com/videos</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <video:video>
+      <video:thumbnail_loc>https://img.youtube.com/vi/uuFONTS2xEM/maxresdefault.jpg</video:thumbnail_loc>
+      <video:title>Presidential Rose Gold Design Elevator</video:title>
+      <video:description>The epitome of elegance. Our Presidential suite cabin in a stunning rose gold finish, combining technology and artistry.</video:description>
+      <video:content_loc>https://www.youtube.com/watch?v=uuFONTS2xEM</video:content_loc>
+      <video:player_loc>https://www.youtube.com/embed/uuFONTS2xEM</video:player_loc>
+      <video:duration>180</video:duration>
+      <video:publication_date>2023-01-01T00:00:00+00:00</video:publication_date>
+    </video:video>
+  </url>
+  
+  <!-- Clients Page -->
+  <url>
+    <loc>https://lubeckelevators.com/clients</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://lubeckelevators.com/Clientage/Clients/GD_Goenka.png</image:loc>
+      <image:caption>GD Goenka School - Esteemed Client</image:caption>
+      <image:title>GD Goenka School</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Certifications Page -->
+  <url>
+    <loc>https://lubeckelevators.com/certifications</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+</urlset> 
