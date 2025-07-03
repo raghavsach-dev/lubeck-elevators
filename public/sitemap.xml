@@ -6,7 +6,7 @@
   <!-- Home Page -->
   <url>
     <loc>https://lubeckelevators.com/</loc>
-    <lastmod>2024-01-01</lastmod>
+    <lastmod>2024-07-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -14,7 +14,7 @@
   <!-- About Page -->
   <url>
     <loc>https://lubeckelevators.com/about</loc>
-    <lastmod>2024-01-01</lastmod>
+    <lastmod>2024-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -22,7 +22,7 @@
   <!-- Contact Page -->
   <url>
     <loc>https://lubeckelevators.com/contact</loc>
-    <lastmod>2024-01-01</lastmod>
+    <lastmod>2024-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -30,7 +30,7 @@
   <!-- Products Main Page -->
   <url>
     <loc>https://lubeckelevators.com/products</loc>
-    <lastmod>2024-01-01</lastmod>
+    <lastmod>2024-07-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -38,7 +38,7 @@
   <!-- Passenger Elevators -->
   <url>
     <loc>https://lubeckelevators.com/products/passenger</loc>
-    <lastmod>2024-01-01</lastmod>
+    <lastmod>2024-07-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -56,7 +56,7 @@
   <!-- Home Lifts -->
   <url>
     <loc>https://lubeckelevators.com/products/home</loc>
-    <lastmod>2024-01-01</lastmod>
+    <lastmod>2024-07-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -69,7 +69,7 @@
   <!-- Goods Elevators -->
   <url>
     <loc>https://lubeckelevators.com/products/goods</loc>
-    <lastmod>2024-01-01</lastmod>
+    <lastmod>2024-07-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -82,7 +82,7 @@
   <!-- Hospital Elevators -->
   <url>
     <loc>https://lubeckelevators.com/products/hospital</loc>
-    <lastmod>2024-01-01</lastmod>
+    <lastmod>2024-07-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -95,7 +95,7 @@
   <!-- Capsule Lifts -->
   <url>
     <loc>https://lubeckelevators.com/products/capsule</loc>
-    <lastmod>2024-01-01</lastmod>
+    <lastmod>2024-07-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -108,7 +108,7 @@
   <!-- Structure Lifts -->
   <url>
     <loc>https://lubeckelevators.com/products/structure</loc>
-    <lastmod>2024-01-01</lastmod>
+    <lastmod>2024-07-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -121,7 +121,7 @@
   <!-- Gallery Page -->
   <url>
     <loc>https://lubeckelevators.com/gallery</loc>
-    <lastmod>2024-01-01</lastmod>
+    <lastmod>2024-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -139,7 +139,7 @@
   <!-- Videos Page -->
   <url>
     <loc>https://lubeckelevators.com/videos</loc>
-    <lastmod>2024-01-01</lastmod>
+    <lastmod>2024-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <video:video>
@@ -156,7 +156,7 @@
   <!-- Clients Page -->
   <url>
     <loc>https://lubeckelevators.com/clients</loc>
-    <lastmod>2024-01-01</lastmod>
+    <lastmod>2024-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -169,9 +169,17 @@
   <!-- Certifications Page -->
   <url>
     <loc>https://lubeckelevators.com/certifications</loc>
-    <lastmod>2024-01-01</lastmod>
+    <lastmod>2024-07-03</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
+  </url>
+  
+  <!-- Blogs Page -->
+  <url>
+    <loc>https://lubeckelevators.com/blogs</loc>
+    <lastmod>2024-07-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   
 </urlset> 

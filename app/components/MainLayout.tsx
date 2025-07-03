@@ -48,6 +48,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
     { name: 'Videos', href: '/videos' },
     { name: 'Clients', href: '/clients' },
     { name: 'Certifications', href: '/certifications' },
+    { name: 'Blogs', href: '/blogs' },
   ];
 
   return (
@@ -87,6 +88,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                 <Link href="/videos" className="hover:text-[#D4AF37] transition-colors duration-300">Videos</Link>
                 <Link href="/clients" className="hover:text-[#D4AF37] transition-colors duration-300">Clients</Link>
                 <Link href="/certifications" className="hover:text-[#D4AF37] transition-colors duration-300">Certifications</Link>
+                <Link href="/blogs" className="hover:text-[#D4AF37] transition-colors duration-300">Blogs</Link>
                 <Link href="/contact" className="px-5 py-2 bg-[#D4AF37] text-black font-semibold rounded-md transition-all duration-300 hover:bg-[#FFD700] hover:shadow-[0_0_20px_rgba(255,215,0,0.5)]">Contact Us</Link>
               </div>
               {/* Mobile Menu Button */}
