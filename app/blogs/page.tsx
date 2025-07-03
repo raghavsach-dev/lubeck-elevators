@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import BlogPageClient from '@/app/components/BlogPageClient';
+import { blogPosts } from './blogData';
+import BlogListPageClient from '@/app/components/BlogListPageClient';
 
 export const metadata: Metadata = {
   title: 'Blog | Lubeck Elevators - Insights & News',
@@ -70,7 +71,7 @@ export default function BlogsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
-      <BlogPageClient />
+      <BlogListPageClient posts={blogPosts} />
     </>
   );
 } 
