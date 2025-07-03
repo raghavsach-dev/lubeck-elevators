@@ -3,6 +3,7 @@
 import { motion, Variants } from 'framer-motion';
 import Image from 'next/image';
 import { BlogPost } from '@/app/blogs/blogData';
+import Link from 'next/link';
 
 interface SingleBlogClientProps {
   post: BlogPost;
@@ -30,6 +31,17 @@ export default function SingleBlogClient({ post }: SingleBlogClientProps) {
         <div className="absolute inset-0 bg-black opacity-80" />
       </div>
       <div className="relative z-10 max-w-4xl mx-auto px-6">
+        <motion.div 
+          initial="hidden" 
+          animate="visible" 
+          variants={itemVariants} 
+          className="mb-8"
+        >
+          <Link href="/blogs" className="inline-flex items-center text-[#D4AF37] hover:text-white transition-colors duration-300">
+            &larr; Back to all blogs
+          </Link>
+        </motion.div>
+
         <motion.div 
           className="text-center"
           initial="hidden"
