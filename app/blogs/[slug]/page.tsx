@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: SingleBlogPageProps): Promise
   };
 }
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   return blogPosts.map(post => ({
     slug: post.slug,
   }));
