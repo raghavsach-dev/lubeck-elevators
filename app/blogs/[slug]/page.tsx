@@ -3,11 +3,7 @@ import SingleBlogClient from '@/app/components/SingleBlogClient';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 
-type SingleBlogPageProps = {
-  params: { slug: string };
-};
-
-export async function generateMetadata({ params }: SingleBlogPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const post = blogPosts.find(p => p.slug === params.slug);
 
   if (!post) {
@@ -48,7 +44,7 @@ export function generateStaticParams() {
   }));
 }
 
-export default function SingleBlogPage({ params }: SingleBlogPageProps) {
+export default async function SingleBlogPage({ params }: { params: { slug: string } }) {
   const post = blogPosts.find(p => p.slug === params.slug);
 
   if (!post) {
