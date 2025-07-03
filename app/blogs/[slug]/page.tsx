@@ -3,9 +3,9 @@ import SingleBlogClient from '@/app/components/SingleBlogClient';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 
-interface SingleBlogPageProps {
+type SingleBlogPageProps = {
   params: { slug: string };
-}
+};
 
 export async function generateMetadata({ params }: SingleBlogPageProps): Promise<Metadata> {
   const post = blogPosts.find(p => p.slug === params.slug);
