@@ -14,8 +14,10 @@ const itemVariants = {
 const GalleryPageClient = () => {
   const [activeTab, setActiveTab] = useState(Object.keys(imageData)[0]);
   const [modalState, setModalState] = useState<{ isOpen: boolean; startIndex: number }>({ isOpen: false, startIndex: 0 });
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
     const hash = window.location.hash.replace('#', '');
     const validTabs = Object.keys(imageData);
     if (hash && validTabs.includes(hash)) {
@@ -32,6 +34,39 @@ const GalleryPageClient = () => {
   };
 
   const currentImages = imageData[activeTab as keyof typeof imageData] || [];
+
+  // Prevent hydration mismatch by not rendering until mounted
+  if (!isMounted) {
+    return (
+      <div className="relative bg-black text-white min-h-screen pt-32 pb-20">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/liftdesign.jpg"
+            alt="Lubeck Elevators background"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-black/80" />
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
+          <motion.div 
+            className="text-center mb-12"
+            initial="hidden"
+            animate="visible"
+            variants={{ visible: { transition: { staggerChildren: 0.2 } } }}
+          >
+            <motion.h1 variants={itemVariants} className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold text-[#D4AF37]">Our Design Gallery</motion.h1>
+            <motion.p variants={itemVariants} className="text-base md:text-lg text-white/70 mt-4 max-w-3xl mx-auto">
+              Explore our curated collections, where unparalleled craftsmanship meets visionary design.
+            </motion.p>
+          </motion.div>
+          <div className="flex items-center justify-center min-h-96">
+            <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-[#D4AF37]"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>

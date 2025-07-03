@@ -22,6 +22,7 @@ const certifications = [
 const CertificationsClient = () => {
   const [selectedPdf, setSelectedPdf] = useState<string | null>(null);
   const [pageWidth, setPageWidth] = useState(220);
+  const [isMounted, setIsMounted] = useState(false);
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -37,6 +38,8 @@ const CertificationsClient = () => {
   };
 
   useEffect(() => {
+    setIsMounted(true);
+    
     const handleResize = () => {
       setPageWidth(window.innerWidth > 640 ? 220 : 180);
     };
@@ -105,9 +108,13 @@ const CertificationsClient = () => {
               >
                 <div className="bg-[#1C1C1C] border border-white/10 rounded-xl p-4 sm:p-6 text-center transition-all duration-300 transform hover:-translate-y-2 hover:border-[#D4AF37] hover:shadow-2xl hover:shadow-[#D4AF37]/20 overflow-hidden">
                   <div className="h-80 mb-4 flex items-center justify-center overflow-hidden rounded-md bg-black/20">
-                    <Document file={cert.file} loading={<LoadingSpinner />} className="transition-transform duration-500 group-hover:scale-105">
-                       <Page pageNumber={1} width={pageWidth} renderTextLayer={false} renderAnnotationLayer={false} />
-                    </Document>
+                    {isMounted ? (
+                      <Document file={cert.file} loading={<LoadingSpinner />} className="transition-transform duration-500 group-hover:scale-105">
+                         <Page pageNumber={1} width={pageWidth} renderTextLayer={false} renderAnnotationLayer={false} />
+                      </Document>
+                    ) : (
+                      <LoadingSpinner />
+                    )}
                   </div>
                   <h3 className="font-heading text-base sm:text-lg md:text-xl font-semibold text-white/90 transition-colors duration-300 h-12 flex items-center justify-center">{cert.name}</h3>
                 </div>
