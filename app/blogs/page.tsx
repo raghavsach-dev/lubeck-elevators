@@ -27,14 +27,7 @@ export const metadata: Metadata = {
     title: 'Blog | Lubeck Elevators - Insights & News',
     description: 'Read the official blog of Lubeck Elevators for insights on elevator technology, safety, and maintenance tips.',
     url: 'https://lubeckelevators.com/blogs',
-    images: [
-      {
-        url: '/logo-og.jpeg',
-        width: 1200,
-        height: 630,
-        alt: 'Lubeck Elevators Blog',
-      },
-    ],
+    
   },
   twitter: {
     title: 'Blog | Lubeck Elevators - Insights & News',

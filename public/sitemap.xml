@@ -181,5 +181,18 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <!-- Blog Post: Why Lubeck is Better -->
+  <url>
+    <loc>https://lubeckelevators.com/blogs/why-lubeck-is-better</loc>
+    <lastmod>2024-07-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://lubeckelevators.com/lift-sample.jpg</image:loc>
+      <image:caption>Luxury elevator interior showcasing Lubeck's commitment to quality design.</image:caption>
+      <image:title>Why Lubeck Elevators is the Better Choice</image:title>
+    </image:image>
+  </url>
   
 </urlset> 

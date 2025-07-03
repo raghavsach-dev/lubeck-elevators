@@ -1,5 +1,20 @@
+# See https://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
+#
+# To control which paths to disallow, remove the wildcard ('*') and specify a user-agent.
+# For example, to disallow crawling of the entire site by Google's crawler:
+#
+# User-agent: Googlebot
+# Disallow: /
+#
+# To allow all crawlers to access all paths, use the following:
 User-agent: *
+Disallow: /api/ # Disallow crawling of API routes
+
+# Allow crawling of all other directories
 Allow: /
+
+# Point to the sitemap file
+Sitemap: https://lubeckelevators.com/sitemap.xml
 
 # Priority pages for crawling
 Allow: /about
@@ -9,9 +24,6 @@ Allow: /gallery
 Allow: /videos
 Allow: /clients
 Allow: /certifications
-
-# Sitemap location
-Sitemap: https://lubeckelevators.com/sitemap.xml
 
 # Crawl delay (optional, for being respectful to server resources)
 Crawl-delay: 1
