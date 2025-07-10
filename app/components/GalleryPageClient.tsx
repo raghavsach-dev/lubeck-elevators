@@ -5,6 +5,12 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ImageGalleryModal } from './ImageGalleryModal';
 import { imageData } from './galleryData';
+import dynamic from 'next/dynamic';
+
+const PdfViewerPopup = dynamic(() => import('./PdfViewerPopup'), {
+  ssr: false,
+  loading: () => <div className="fixed inset-0 bg-black/90 z-[100] flex items-center justify-center"><div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-[#D4AF37]"></div></div> 
+});
 
 const itemVariants = {
   hidden: { y: 20, opacity: 0, scale: 0.95 },
@@ -15,6 +21,7 @@ const GalleryPageClient = () => {
   const [activeTab, setActiveTab] = useState(Object.keys(imageData)[0]);
   const [modalState, setModalState] = useState<{ isOpen: boolean; startIndex: number }>({ isOpen: false, startIndex: 0 });
   const [isMounted, setIsMounted] = useState(false);
+  const [showCabinDesigns, setShowCabinDesigns] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
@@ -141,6 +148,16 @@ const GalleryPageClient = () => {
               ))}
             </motion.div>
           </AnimatePresence>
+
+          {/* Cabin Designs Button */}
+          <div className="mt-16 mb-16 text-center">
+            <button
+              onClick={() => setShowCabinDesigns(true)}
+              className="px-8 py-3 bg-[#D4AF37] text-black font-semibold rounded-lg transition-all duration-300 hover:bg-[#FFD700] hover:scale-105 transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
+            >
+              View Cabin Designs Catalog
+            </button>
+          </div>
         </div>
       </div>
       {modalState.isOpen && (
@@ -148,6 +165,13 @@ const GalleryPageClient = () => {
           images={currentImages.map(img => ({ src: img.src, alt: img.title }))}
           startIndex={modalState.startIndex}
           onClose={closeModal}
+        />
+      )}
+      {showCabinDesigns && (
+        <PdfViewerPopup
+          file="/CABIN_DESIGNS_CATELOGUE.pdf"
+          name="Cabin Designs Catalog"
+          onClose={() => setShowCabinDesigns(false)}
         />
       )}
     </>

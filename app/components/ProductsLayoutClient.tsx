@@ -12,6 +12,8 @@ const products = [
   { name: 'Goods Lift', path: '/products/goods' },
   { name: 'Home Lift', path: '/products/home' },
   { name: 'Structure Lift', path: '/products/structure' },
+  { name: 'Lift Doors', path: '/products/doors' },
+  { name: 'Accessories', path: '/products/accessories' },
 ];
 
 export default function ProductsLayoutClient({ children }: { children: React.ReactNode }) {

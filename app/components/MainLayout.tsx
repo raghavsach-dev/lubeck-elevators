@@ -38,6 +38,8 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
     { name: 'Goods Lift', href: '/products/goods' },
     { name: 'Home Lift', href: '/products/home' },
     { name: 'Structure Lift', href: '/products/structure' },
+    { name: 'Lift Doors', href: '/products/doors' },
+    { name: 'Accessories', href: '/products/accessories' },
   ];
 
   const allLinks = [

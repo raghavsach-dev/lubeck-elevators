@@ -40,6 +40,30 @@ const videos = [
     title: 'Modern Commercial Installation',
     description: 'A versatile and sleek elevator designed for high-traffic commercial spaces, demonstrating smooth, reliable operation.',
     isYoutube: true,
+  },
+  {
+    src: 'https://www.youtube.com/embed/BhLqUl-txlg',
+    title: 'Elevator Installation Showcase',
+    description: 'Professional elevator installation and testing process, demonstrating our commitment to quality and safety standards.',
+    isYoutube: true,
+  },
+  {
+    src: 'https://www.youtube.com/embed/nsvGImuKHDU',
+    title: 'Advanced Elevator Technology',
+    description: 'Demonstration of cutting-edge elevator technology and innovative features that set Lubeck Elevators apart.',
+    isYoutube: true,
+  },
+  {
+    src: 'https://www.youtube.com/embed/W3cEUwkLkLo',
+    title: 'Premium Elevator Design',
+    description: 'Showcasing elegant elevator designs and premium finishes that enhance the aesthetic appeal of any building.',
+    isYoutube: true,
+  },
+  {
+    src: 'https://www.youtube.com/embed/bG4uoheCQD4',
+    title: 'Elevator Performance Testing',
+    description: 'Comprehensive testing procedures and quality assurance processes that ensure optimal elevator performance and safety.',
+    isYoutube: true,
   }
 ];
 
