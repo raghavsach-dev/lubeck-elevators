@@ -194,5 +194,18 @@
       <image:title>Why Lubeck Elevators is the Better Choice</image:title>
     </image:image>
   </url>
+
+  <!-- Blog Post: Home Lift Installation Guide -->
+  <url>
+    <loc>https://lubeckelevators.com/blogs/complete-guide-home-lift-installation</loc>
+    <lastmod>2024-12-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://lubeckelevators.com/Products/Home/1.png</image:loc>
+      <image:caption>Complete guide to home lift installation with expert tips and considerations.</image:caption>
+      <image:title>The Complete Guide to Home Lift Installation</image:title>
+    </image:image>
+  </url>
   
 </urlset> 

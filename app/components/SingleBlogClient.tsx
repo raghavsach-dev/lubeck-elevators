@@ -63,7 +63,7 @@ export default function SingleBlogClient({ post }: SingleBlogClientProps) {
         </motion.div>
 
         <motion.article
-          className="mt-12 text-white/80 text-lg leading-relaxed prose-invert prose-p:text-white/80 prose-h2:text-[#D4AF37] prose-h3:text-white"
+          className="mt-12 text-white/80 text-lg leading-relaxed prose-invert prose-p:text-white/80 prose-h2:text-[#D4AF37] prose-h3:text-white text-justify"
           initial="hidden"
           animate="visible"
           variants={itemVariants}
