@@ -44,7 +44,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'why-lubeck-is-better',
     title: 'Why Lubeck Elevators is the Better Choice Among Its Competitors',
     date: 'July 3, 2024',
-    image: '/lift-sample.jpg',
+    image: '/Gallery/MAJESTY/2.jpg',
     excerpt: 'Choosing the right elevator is about safety, reliability, aesthetics, and long-term value. In a competitive market, Lubeck Elevators stands out as a premier choice. Here\'s why.',
     content: `
       <p>Choosing the right elevator for your residential or commercial property is a significant decision. It&apos;s not just about vertical transportation; it&apos;s about safety, reliability, aesthetics, and long-term value. In a competitive market, Lubeck Elevators stands out as a premier choice. Here&apos;s why.</p>
