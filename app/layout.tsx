@@ -3,8 +3,6 @@ import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
 import MainLayout from './components/MainLayout';
 
-export const runtime = 'edge';
-
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' });
 
