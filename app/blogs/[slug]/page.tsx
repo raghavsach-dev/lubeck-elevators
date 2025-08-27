@@ -3,9 +3,8 @@ import SingleBlogClient from '@/app/components/SingleBlogClient';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 
-export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const params = await props.params;
-  const slug = params.slug;
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const { slug } = params;
   const post = blogPosts.find(p => p.slug === slug);
 
   if (!post) {
@@ -40,15 +39,14 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
   };
 }
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
-  return blogPosts.map(post => ({
-    slug: post.slug,
-  }));
+  return blogPosts.map(post => ({ slug: post.slug }));
 }
 
-export default async function SingleBlogPage(props: { params: Promise<{ slug: string }> }) {
-  const params = await props.params;
-  const slug = params.slug;
+export default async function SingleBlogPage({ params }: { params: { slug: string } }) {
+  const { slug } = params;
   const post = blogPosts.find(p => p.slug === slug);
 
   if (!post) {
