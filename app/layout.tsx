@@ -86,10 +86,10 @@ export const metadata: Metadata = {
     canonical: 'https://lubeckelevators.com',
   },
   other: {
-    'geo.region': 'IN-DL',
-    'geo.placename': 'Delhi',
-    'geo.position': '28.6139;77.2090',
-    'ICBM': '28.6139, 77.2090',
+    'geo.region': 'IN-UP',
+    'geo.placename': 'Kaushambi, Ghaziabad',
+    'geo.position': '28.6458;77.3197',
+    'ICBM': '28.6458, 77.3197',
   },
 };
 
@@ -108,9 +108,10 @@ const jsonLd = {
   },
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'A 264, SURAJMAL VIHAR',
-    addressLocality: 'Delhi',
-    postalCode: '110092',
+    streetAddress: '309, 3rd Floor, Angel Mega Mall, Kaushambi',
+    addressLocality: 'Ghaziabad',
+    addressRegion: 'Uttar Pradesh',
+    postalCode: '201010',
     addressCountry: 'IN'
   },
   contactPoint: [

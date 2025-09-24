@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import ContactPageClient from '../components/ContactPageClient';
 
 export const metadata: Metadata = {
-  title: 'Contact Lubeck Elevators Delhi | Get Free Quote | Elevator Installation & Service',
-  description: 'Contact Lubeck Elevators for premium elevator installation in Delhi, Noida, Gurugram, Faridabad. Get free consultation and quote. Call +91-9811013981, +91-9310465077. Head office: A-264, Surajmal Vihar, Delhi 110092. Email: lubeckelevator@gmail.com',
+  title: 'Contact Lubeck Elevators Ghaziabad | Get Free Quote | Elevator Installation & Service',
+  description: 'Contact Lubeck Elevators for premium elevator installation in Delhi, Noida, Gurugram, Faridabad. Get free consultation and quote. Call +91-9811013981, +91-9310465077. Head office: 309, 3rd Floor, Angel Mega Mall, Kaushambi, Ghaziabad 201010. Email: lubeckelevator@gmail.com',
   keywords: [
     'contact Lubeck Elevators',
     'elevator installation Delhi',
@@ -20,14 +20,14 @@ export const metadata: Metadata = {
     'home lift installation Delhi',
     'commercial elevator Delhi',
     'elevator company near me',
-    'Surajmal Vihar elevator company',
+    'Kaushambi elevator company',
     'Delhi elevator manufacturer contact',
     'elevator emergency service Delhi',
     'elevator AMC Delhi',
     'passenger elevator Delhi'
   ],
   openGraph: {
-    title: 'Contact Lubeck Elevators Delhi | Get Free Quote | Elevator Installation & Service',
+    title: 'Contact Lubeck Elevators Ghaziabad | Get Free Quote | Elevator Installation & Service',
     description: 'Contact Lubeck Elevators for premium elevator installation in Delhi, Noida, Gurugram, Faridabad. Get free consultation and quote.',
     url: 'https://lubeckelevators.com/contact',
     images: [
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    title: 'Contact Lubeck Elevators Delhi | Get Free Quote | Elevator Installation & Service',
+    title: 'Contact Lubeck Elevators Ghaziabad | Get Free Quote | Elevator Installation & Service',
     description: 'Contact Lubeck Elevators for premium elevator installation in Delhi, Noida, Gurugram, Faridabad. Get free consultation.',
   },
   alternates: {
@@ -65,16 +65,16 @@ const contactPageJsonLd = {
     email: 'LUBECKELEVATOR@GMAIL.COM',
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'A 264, SURAJMAL VIHAR',
-      addressLocality: 'Delhi',
-      addressRegion: 'Delhi',
-      postalCode: '110092',
+      streetAddress: '309, 3rd Floor, Angel Mega Mall, Kaushambi',
+      addressLocality: 'Ghaziabad',
+      addressRegion: 'Uttar Pradesh',
+      postalCode: '201010',
       addressCountry: 'IN'
     },
     geo: {
       '@type': 'GeoCoordinates',
-      latitude: 28.6139,
-      longitude: 77.2090
+      latitude: 28.6458,
+      longitude: 77.3197
     },
     areaServed: [
       {
@@ -127,13 +127,13 @@ const contactPageJsonLd = {
     priceRange: '₹₹₹',
     paymentAccepted: ['Cash', 'Bank Transfer', 'Cheque'],
     currenciesAccepted: 'INR',
-    hasMap: 'https://maps.google.com/?q=A+264,+SURAJMAL+VIHAR,+DELHI+110092',
+    hasMap: 'https://maps.google.com/?q=309,+3rd+Floor,+Angel+Mega+Mall,+Kaushambi,+Ghaziabad+201010',
     serviceArea: {
       '@type': 'GeoCircle',
       geoMidpoint: {
         '@type': 'GeoCoordinates',
-        latitude: 28.6139,
-        longitude: 77.2090
+        latitude: 28.6458,
+        longitude: 77.3197
       },
       geoRadius: '500000'
     }
