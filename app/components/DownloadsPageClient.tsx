@@ -152,7 +152,7 @@ export default function DownloadsPageClient() {
             className="text-base md:text-lg text-white/60 max-w-3xl mx-auto"
           >
             Download our official mobile applications for enhanced customer experience and streamlined team operations.
-            Available on both iOS and Android platforms.
+            Available on Android.
           </motion.p>
         </motion.div>
 
