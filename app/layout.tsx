@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
-//import './globals.css'; 
+import './globals.css';
 import MainLayout from './components/MainLayout';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
